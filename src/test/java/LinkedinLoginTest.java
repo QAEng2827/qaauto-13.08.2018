@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static java.lang.Thread.sleep;
+
 public class LinkedinLoginTest {
     @Test
     public void successfullLoginTest() {
@@ -43,5 +45,42 @@ public class LinkedinLoginTest {
         Assert.assertTrue(profileNavItem.isDisplayed(), "profileNavItem button is not displayed on Home Page");
 
 
+
     }
+        // negative test
+
+    @Test
+    public void negativeloginTest() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.linkedin.com/");
+
+        //проверяем тайтл и урл и элементы на странице
+
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.linkedin.com/", "Login page URL is wrong.");
+        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up", "Login page title is wrong.");
+
+        WebElement userEmailField = driver.findElement(By.xpath("//input[@id = 'login-email']"));
+        WebElement userPasswordField = driver.findElement(By.xpath("//input[@id = 'login-password']"));
+        WebElement singInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
+
+        Assert.assertTrue(singInButton.isDisplayed(), "signIn button is not displayed on Login page.");
+
+        // String loginEmail = "qaeng2728@gmail.com",loginPsw = "chertopoloh2827";
+        userEmailField.sendKeys("a@b.com" );
+        userPasswordField.sendKeys("wrong");
+        singInButton.click();
+
+       try{ sleep(3000);}
+       catch (InterruptedException e){
+           e.printStackTrace();
+       }
+
+        WebElement alertMessage = driver.findElement(By.xpath("//div[@role='alert']"));
+                 Assert.assertEquals(alertMessage.getText(),"There were one or more errors in your submission. Please correct the marked fields below.","Alert message text is wrong");
+
+
+
+    }
+
+
 }
