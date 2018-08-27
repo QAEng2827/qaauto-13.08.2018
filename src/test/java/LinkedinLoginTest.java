@@ -158,7 +158,7 @@ public class LinkedinLoginTest {
 
 
         }
-    @Test
+    @Test(enabled = false)
     public void invalidLoginTest() {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com/");
