@@ -7,12 +7,14 @@ public class LinkedInAlertPage {
 
     private WebDriver driver;
     private WebElement alertMessage;
+    private WebElement alertMessageExtra;
     private WebElement signInButton;
 
     // конструктор
     public LinkedInAlertPage(WebDriver driver){
         this.driver = driver;
         initElements();
+        initElementsExtra();
     }
 
     private void initElements() {
@@ -20,6 +22,14 @@ public class LinkedInAlertPage {
       alertMessage = driver.findElement(By.xpath("//div[@role='alert']/*/strong"));
 
         alertMessage.getText();
+
+        }
+
+   private void initElementsExtra() {
+
+        alertMessageExtra = driver.findElement(By.xpath("//span[@id='session_password-login-error']"));
+
+        alertMessageExtra.getText();
     }
 
 
@@ -33,10 +43,14 @@ public class LinkedInAlertPage {
 
     public String getCurrentAlertMessage(){return alertMessage.getText();}
 
+    public String getCurrentAlertMessageExtra(){
+        return alertMessageExtra.getText();
+    }
+
     public boolean isPageLoaded(){
         return getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit")
-                && getCurrentTitle().equals("Sing In to LinkedIn");
-                //&& alertMessage.isDisplayed();
+                && getCurrentTitle().equals("Sing In to LinkedIn")
+                && alertMessageExtra.isDisplayed();
 
     }
 }

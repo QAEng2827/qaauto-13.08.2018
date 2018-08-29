@@ -73,9 +73,13 @@ public class LinkedinLoginTest {
 
         LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
         String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
+        String alertMessageExtraSample = "The password you provided must have at least 6 characters.";
         Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
         Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
         System.out.println(linkedInAlertPage.getCurrentAlertMessage());
+        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessageExtra(),alertMessageExtraSample,"Alert message text is wrong");
+        System.out.println(linkedInAlertPage.getCurrentAlertMessageExtra());
+
 
 
 
