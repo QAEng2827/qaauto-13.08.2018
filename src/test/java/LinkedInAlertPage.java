@@ -43,7 +43,7 @@ public class LinkedInAlertPage {
 
     public String getCurrentAlertMessage(){return alertMessage.getText();}
 
-    public String getCurrentAlertMessageExtra(){
+    public String getCurrentAlertMessageExtra(WebElement path){
         return alertMessageExtra.getText();
     }
 

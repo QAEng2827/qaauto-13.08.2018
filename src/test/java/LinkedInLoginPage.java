@@ -49,4 +49,11 @@ public class LinkedInLoginPage {
                 && signInButton.isDisplayed();
 
     }
+
+    public boolean isButtonEnabled(){
+        return getCurrentUrl().equals("https://www.linkedin.com/")
+                && getCurrentTitle().equals("LinkedIn: Log In or Sign Up")
+                && signInButton.isEnabled();
+
+    }
 }

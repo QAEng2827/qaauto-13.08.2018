@@ -47,15 +47,13 @@ public class LinkedinLoginTest {
        // вводим криденшелс
         linkedInLoginPage.login("qaeng2728@gmail.com","chertopoloh2827");
 
-// сделать красиво для страницы хоум
-
         LinkedInHomePage linkedInHomePage = new LinkedInHomePage(driver);
         Assert.assertTrue(linkedInHomePage.isPageLoaded(), "Home page is not loaded.");
 
     }
     // negative test
 
-    @Test
+    @Test //done
     public void negativeloginTest() {
 
         //проверяем тайтл и урл и элементы на странице
@@ -64,24 +62,102 @@ public class LinkedinLoginTest {
 
         //  проверяем, загрузилась ли страница
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
-
-     //   Assert.assertTrue(singInButton.isDisplayed(), "signIn button is not displayed on Login page.");
-
-         linkedInLoginPage.login("a@b.com","wrong");
-
-         // переделать красиво для спейдж обжект алерт
+        linkedInLoginPage.login("a@b.com","wrong");
 
         LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
         String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
         String alertMessageExtraSample = "The password you provided must have at least 6 characters.";
+        WebElement alertMessagePath = driver.findElement(By.xpath("//span[@id ='session_password-login-error']"));
+
         Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
         Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
-        System.out.println(linkedInAlertPage.getCurrentAlertMessage());
-        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessageExtra(),alertMessageExtraSample,"Alert message text is wrong");
-        System.out.println(linkedInAlertPage.getCurrentAlertMessageExtra());
+        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath),alertMessageExtraSample,"Alert message text is wrong");
+
+    }
+
+    @Test // done
+    public void tooLongPswTest() {
+
+        //проверяем тайтл и урл и элементы на странице
+        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
+
+        //  проверяем, загрузилась ли страница
+        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
+
+        linkedInLoginPage.login("qaeng2728@gmail.com","Home Task #1:" +
+                "1) Add lines of code that will do following actions:" +
+                "- Enter 'selenium' into searchField on google.com web page." +
+                "- Hit 'Enter' button from keyboard (to get list of search results)" +
+                "2) Describe environment setup in a separate file:" +
+                "- Create file 'README.md' in a project root folder" +
+                "- In this file describe a list of required actions to setup environment (which tools to download and install, any tricky setup hints)");
+
+        LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
+        String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
+        Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
+        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
+
+        String alertMessageExtraSample = "The password you provided must have at most 400 characters.";
+        WebElement alertMessagePath = driver.findElement(By.xpath("//span[@id ='session_password-login-error']"));
+
+        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath),alertMessageExtraSample,"Alert message text is wrong");
+        System.out.println(alertMessagePath);
+        System.out.println("HI: " + linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath));
+
+        Assert.assertTrue(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath).contains("The password you provided must have at most 400 characters."));
+
+        }
 
 
 
+    @Test //done
+    // логин и пароль валидные, но от разных аккаунтов
+    public void noMatchesLoginPswTest() {
+        //проверяем тайтл и урл и элементы на странице
+
+        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
+
+        //  проверяем, загрузилась ли страница
+        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
+
+        linkedInLoginPage.login("qaeng2728@gmail.com","Artemio2728");
+
+        LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
+        String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
+        String alertMessageExtraSample = "Hmm, that's not the right password. Please try again or request a new one.";
+        WebElement alertMessagePath = driver.findElement(By.xpath("//*[@id='session_password-login-error']"));
+
+        Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
+        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
+        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath),alertMessageExtraSample,"Alert message text is wrong");
+
+    }
+
+    @Test // why? wtf?
+    public void invalidLoginTest() {
+
+        //проверяем тайтл и урл и элементы на странице
+        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
+
+        //  проверяем, загрузилась ли страница
+        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
+        linkedInLoginPage.login("qaeng2728 gmail.com","something");
+
+
+        LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
+        String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
+        String alertMessageExtraSample = "Please enter a valid email address.";//*[@id='session_key-login-error']
+
+        WebElement alertMessagePath = driver.findElement(By.xpath("//*[@id='session_key-login-error']")); // проверить хпас
+
+        Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
+        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
+
+        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath),alertMessageExtraSample,"Alert message text is wrong");
+
+
+
+      //  Assert.assertTrue(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath).contains("Please enter a valid email address."));
 
     }
 
@@ -95,15 +171,13 @@ public class LinkedinLoginTest {
         //  проверяем, загрузилась ли страница
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
 
-        //   Assert.assertTrue(singInButton.isDisplayed(), "signIn button is not displayed on Login page.");
-
         linkedInLoginPage.login("Home Task #1:" +
-                "1) Add lines of code that will do following actions:" +
-                "- Enter 'selenium' into searchField on google.com web page." +
-                "- Hit 'Enter' button from keyboard (to get list of search results)" +
-                "2) Describe environment setup in a separate file:" +
-                "- Create file 'README.md' in a project root folder" +
-                "- In this file describe a list of required actions to setup environment (which tools to download and install, any tricky setup hints)@b.com",
+                        "1) Add lines of code that will do following actions:" +
+                        "- Enter 'selenium' into searchField on google.com web page." +
+                        "- Hit 'Enter' button from keyboard (to get list of search results)" +
+                        "2) Describe environment setup in a separate file:" +
+                        "- Create file 'README.md' in a project root folder" +
+                        "- In this file describe a list of required actions to setup environment (which tools to download and install, any tricky setup hints)@b.com",
                 "chertopoloh2827");
 
         LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
@@ -111,118 +185,42 @@ public class LinkedinLoginTest {
         Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
         Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
 
-      //  WebElement alertMessage = driver.findElement(By.xpath("//span[@id ='session_key-login-error']"));
-
-      // пока       Assert.assertTrue(alertMessage.getText().contains("The text you provided is too long (the maximum length is 128 characters"));
-
-    }
-
-    @Test
-    public void tooLongPswTest() {
-
-        //проверяем тайтл и урл и элементы на странице
-
-        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
-
-        //  проверяем, загрузилась ли страница
-        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
-
-        //   Assert.assertTrue(singInButton.isDisplayed(), "signIn button is not displayed on Login page.");
-
-        linkedInLoginPage.login("qaeng2728@gmail.com","Home Task #1:" +
-                "1) Add lines of code that will do following actions:" +
-                "- Enter 'selenium' into searchField on google.com web page." +
-                "- Hit 'Enter' button from keyboard (to get list of search results)" +
-                "2) Describe environment setup in a separate file:" +
-                "- Create file 'README.md' in a project root folder" +
-                "- In this file describe a list of required actions to setup environment (which tools to download and install, any tricky setup hints)");
-
-        // переделать красиво для спейдж обжект алерт
-        LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
-        String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
-        Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
-        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
+        WebElement alertMessagePath = driver.findElement(By.xpath("//span[@id ='session_key-login-error']"));
 
 
-        /*    WebElement alertMessage = driver.findElement(By.xpath("//span[@id ='session_password-login-error']"));
-
-            Assert.assertEquals(alertMessage.getText(), "The password you provided must have at most 400 characters.", "Alert message text is wrong");
-
-*/
-        }
-
-    @Test
-    public void invalidLoginTest() {
-
-        //проверяем тайтл и урл и элементы на странице
-
-        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
-
-        //  проверяем, загрузилась ли страница
-        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
-
-        //   Assert.assertTrue(singInButton.isDisplayed(), "signIn button is not displayed on Login page.");
-
-        linkedInLoginPage.login("qaeng2728 gmail.com","something");
-
-        // переделать красиво для спейдж обжект алерт
-
-        LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
-        String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
-        Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
-        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
-
-        /*WebElement alertMessage = driver.findElement(By.xpath("//span[@id ='session_key-login-error']"));
-
-        Assert.assertEquals(alertMessage.getText(), "Please enter a valid email address.", "Alert message text is wrong");
-*/
+        System.out.println(alertMessagePath);
+        System.out.println(alertMessagePath.getText());
+        System.out.println(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath));
+        Assert.assertTrue(!linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath).contains("The text you provided is too long (the maximum length is 128 characters"));
 
     }
 
-    @Test
-    // логин и пароль валидные, но от разных аккаунтов
-    public void noMatchesLoginPswTest() {
-        //проверяем тайтл и урл и элементы на странице
-
-        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
-
-        //  проверяем, загрузилась ли страница
-        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
-
-        //   Assert.assertTrue(singInButton.isDisplayed(), "signIn button is not displayed on Login page.");
-
-        linkedInLoginPage.login("qaeng2728@gmail.com","Artemio2728");  LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
-        String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
-        Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
-        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
-
-
-
-        // переделать красиво для спейдж обжект алерт
-
-       // WebElement alertMessage = driver.findElement(By.xpath("//div[@role='alert']"));
-      /* Assert.assertEquals(alertMessage.getText(),alertMessageSample,"Alert message text is wrong");
-        System.out.println(alertMessage.getText());*/
-
-    }
-
+// Одно из полей пустое и перехода на другую страницу не происходит
     @Test
     // поле логина пустое
     public void noLoginTest() {
-        //проверяем тайтл и урл и элементы на странице
 
         LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
-
-        //  проверяем, загрузилась ли страница
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
-
-        //   Assert.assertTrue(singInButton.isDisplayed(), "signIn button is not displayed on Login page.");
 
         linkedInLoginPage.login("","wrong");
 
-      // сделать красиво
+      //  если страница не изменилась,  и кнопа неактивна, значит ошибка
+        Assert.assertFalse(linkedInLoginPage.isButtonEnabled(), "Login or password is absent");
 
-        //Assert.assertFalse(singInButton.isEnabled(), "Incorrect work!");
+    }
+
+    @Test
+    // поле пароля пустое
+    public void noPswTest() {
+
+        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
+        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
+
+        linkedInLoginPage.login("qaeng2728@gmail.com","");
+
+        //  если страница не изменилась,  и кнопа неактивна, значит ошибка
+        Assert.assertFalse(linkedInLoginPage.isButtonEnabled(), "Login or password is absent");
 
 
 
