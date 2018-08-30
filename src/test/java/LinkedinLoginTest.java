@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static java.lang.Thread.sleep;
@@ -25,30 +26,50 @@ public class LinkedinLoginTest {
 
        driver.quit();
     }
+    @DataProvider
+    public Object[][] validDataProvider() {
+        return new Object[][]{
+                { "qaeng2728@gmail.com", "chertopoloh2827"},
+                { "QAEeng2728@gmail.com", "chertopoloh2827"},
+
+        };
+    }
 
 
-    @Test
-    public void successfullLoginTest() {
-
-
-        // вызываем метод login
+    @Test(dataProvider = "validDataProvider")
+    public void successfullLoginTest(String userEmail, String userPassword) {
 
         LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
+        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
+        LinkedInHomePage linkedInHomePage = linkedInLoginPage.login(userEmail,userPassword);
 
-        //  проверяем, загрузилась ли страница
+        Assert.assertTrue(linkedInHomePage.isPageLoaded(), "Home page is not loaded.");
+    }
+
+    // Одно из полей пустое и перехода на другую страницу не происходит
+    @Test // done
+    // поле логина пустое
+    public void emptyUserEmailandUserPassvordTest() {
+
+        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
 
-       // вводим криденшелс
-        linkedInLoginPage.login("qaeng2728@gmail.com","chertopoloh2827");
+        linkedInLoginPage.login("","wrong");
+        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
 
-        LinkedInHomePage linkedInHomePage = new LinkedInHomePage(driver);
-        Assert.assertTrue(linkedInHomePage.isPageLoaded(), "Home page is not loaded.");
+        //  если страница не изменилась,  и кнопа неактивна, значит ошибка
+       // мое  Assert.assertFalse(linkedInLoginPage.isButtonEnabled(), "Login or password is absent");
 
     }
+
+   // @Test // done
+
+
+
     // negative tests
 
-    @Test //done
-    public void negativeloginTest() {
+    /*@Test //done
+   public void negativeloginTest() {
 
         //проверяем тайтл и урл и элементы на странице
 
@@ -167,42 +188,13 @@ public class LinkedinLoginTest {
 
         LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
         String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
-        Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
-        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
+        Assert.assertFalse(linkedInAlertPage.isPageLoaded(), "Alert page is not loaded");
+        Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(), alertMessageSample, "Alert message text is wrong");
 
         WebElement alertMessagePath = driver.findElement(By.xpath("//span[@id ='session_key-login-error']"));
 
         Assert.assertTrue(!linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath).contains("The text you provided is too long (the maximum length is 128 characters"), "Not contains");
 
-
+    }*/
     }
 
-// Одно из полей пустое и перехода на другую страницу не происходит
-    @Test // done
-    // поле логина пустое
-    public void noLoginTest() {
-
-        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
-        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
-
-        linkedInLoginPage.login("","wrong");
-
-      //  если страница не изменилась,  и кнопа неактивна, значит ошибка
-        Assert.assertFalse(linkedInLoginPage.isButtonEnabled(), "Login or password is absent");
-
-    }
-
-    @Test // done
-    // поле пароля пустое
-    public void noPswTest() {
-
-        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(driver);
-        Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
-
-        linkedInLoginPage.login("qaeng2728@gmail.com","");
-
-        //  если страница не изменилась,  и кнопка неактивна, значит ошибка
-        Assert.assertFalse(linkedInLoginPage.isButtonEnabled(), "Login or password is absent");
-
-    }
-}

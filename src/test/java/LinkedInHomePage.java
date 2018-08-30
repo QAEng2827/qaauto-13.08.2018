@@ -19,8 +19,6 @@ public class LinkedInHomePage {
     private void initElements() {
 
         profileNavItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-
-       // signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
     }
 
 
@@ -34,7 +32,7 @@ public class LinkedInHomePage {
 
     public boolean isPageLoaded(){
         return getCurrentUrl().equals("https://www.linkedin.com/feed/")
-                && getCurrentTitle().equals("LinkedIn")
+                && getCurrentTitle().contains("LinkedIn")
                 && profileNavItem.isDisplayed();
 
     }
