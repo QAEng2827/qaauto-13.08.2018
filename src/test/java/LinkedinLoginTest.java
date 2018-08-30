@@ -23,18 +23,12 @@ public class LinkedinLoginTest {
     @AfterMethod
     public void afterMethod(){
 
-//        driver.quit(); // закрываем браузер
+       driver.quit();
     }
+
 
     @Test
     public void successfullLoginTest() {
-
-        //Navigate to linkedin.com
-        //Verify that login page is loaded
-        //Enter userEmail
-        //Enter userPassword
-        //Click on 'Sing in' button
-        //Verify Home page is displayed
 
 
         // вызываем метод login
@@ -51,7 +45,7 @@ public class LinkedinLoginTest {
         Assert.assertTrue(linkedInHomePage.isPageLoaded(), "Home page is not loaded.");
 
     }
-    // negative test
+    // negative tests
 
     @Test //done
     public void negativeloginTest() {
@@ -70,6 +64,7 @@ public class LinkedinLoginTest {
         WebElement alertMessagePath = driver.findElement(By.xpath("//span[@id ='session_password-login-error']"));
 
         Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
+
         Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
         Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath),alertMessageExtraSample,"Alert message text is wrong");
 
@@ -99,15 +94,11 @@ public class LinkedinLoginTest {
 
         String alertMessageExtraSample = "The password you provided must have at most 400 characters.";
         WebElement alertMessagePath = driver.findElement(By.xpath("//span[@id ='session_password-login-error']"));
-
         Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath),alertMessageExtraSample,"Alert message text is wrong");
-        System.out.println(alertMessagePath);
-        System.out.println("HI: " + linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath));
 
-        Assert.assertTrue(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath).contains("The password you provided must have at most 400 characters."));
+        Assert.assertTrue(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath).contains("The password you provided must have at most 400 characters."), "Есть такой текст");
 
         }
-
 
 
     @Test //done
@@ -143,25 +134,19 @@ public class LinkedinLoginTest {
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
         linkedInLoginPage.login("qaeng2728 gmail.com","something");
 
-
         LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
         String alertMessageSample = "There were one or more errors in your submission. Please correct the marked fields below.";
-        String alertMessageExtraSample = "Please enter a valid email address.";//*[@id='session_key-login-error']
-
-        WebElement alertMessagePath = driver.findElement(By.xpath("//*[@id='session_key-login-error']")); // проверить хпас
+        String alertMessageExtraSample = "Please enter a valid email address.";
+        WebElement alertMessagePath = driver.findElement(By.xpath("//span[@id='session_key-login-error']"));
 
         Assert.assertFalse(linkedInAlertPage.isPageLoaded(),"Alert page is not loaded");
         Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessage(),alertMessageSample,"Alert message text is wrong");
-
         Assert.assertEquals(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath),alertMessageExtraSample,"Alert message text is wrong");
 
 
-
-      //  Assert.assertTrue(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath).contains("Please enter a valid email address."));
-
     }
 
-    @Test
+    @Test // done
     public void tooLongLoginTest() {
 
         //проверяем тайтл и урл и элементы на странице
@@ -187,16 +172,13 @@ public class LinkedinLoginTest {
 
         WebElement alertMessagePath = driver.findElement(By.xpath("//span[@id ='session_key-login-error']"));
 
+        Assert.assertTrue(!linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath).contains("The text you provided is too long (the maximum length is 128 characters"), "Not contains");
 
-        System.out.println(alertMessagePath);
-        System.out.println(alertMessagePath.getText());
-        System.out.println(linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath));
-        Assert.assertTrue(!linkedInAlertPage.getCurrentAlertMessageExtra(alertMessagePath).contains("The text you provided is too long (the maximum length is 128 characters"));
 
     }
 
 // Одно из полей пустое и перехода на другую страницу не происходит
-    @Test
+    @Test // done
     // поле логина пустое
     public void noLoginTest() {
 
@@ -210,7 +192,7 @@ public class LinkedinLoginTest {
 
     }
 
-    @Test
+    @Test // done
     // поле пароля пустое
     public void noPswTest() {
 
@@ -219,10 +201,8 @@ public class LinkedinLoginTest {
 
         linkedInLoginPage.login("qaeng2728@gmail.com","");
 
-        //  если страница не изменилась,  и кнопа неактивна, значит ошибка
+        //  если страница не изменилась,  и кнопка неактивна, значит ошибка
         Assert.assertFalse(linkedInLoginPage.isButtonEnabled(), "Login or password is absent");
-
-
 
     }
 }
