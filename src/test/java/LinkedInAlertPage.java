@@ -5,69 +5,36 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LinkedInAlertPage {
-
-
     private WebDriver driver;
-    private WebElement message;
-    private WebElement alertMessageExtra;
+    @FindBy (xpath = "//span[@id='session_key-login-error']")
+    private WebElement alertMessageLoginText;
 
-    @FindBy(xpath = "//input[@id = 'login-email']")
-    private WebElement userEmailField;
+    @FindBy (xpath = "//span[@id='session_password-login-error']")
+    private WebElement alertMessagePasswordText;
 
-    @FindBy(xpath = "//input[@id = 'login-password']" )
-    private WebElement userPasswordField;
-
-    @FindBy(xpath = "//input[@id='login-submit']" )
-    private WebElement signInButton;
-
-    // конструктор
-    public LinkedInAlertPage(WebDriver driver){
-        this.driver = driver;
-        initElementsExtra();
-
+    public LinkedInAlertPage (WebDriver driver){
+        this.driver=driver;
+        PageFactory.initElements(driver, this);
     }
-//    private void initElements() {
-//
-//      alertMessage = driver.findElement(By.xpath("//div[@role='alert']/*/strong"));
-//
-//        alertMessage.getText();
-//
-//        }
-//
-   private void initElementsExtra() {
-
-        alertMessageExtra = driver.findElement(By.xpath("//span[@class='error']"));
-
-        //alertMessageExtra.getText();
-    }
-
-
     public String getCurrentUrl(){
+
         return driver.getCurrentUrl();
     }
 
     public String getCurrentTitle(){
-        return driver.getTitle();
+        return  driver.getTitle();
     }
 
-  //  public String getCurrentAlertMessage(){return alertMessage.getText();}
-
-    public String getCurrentAlertMessageExtra(WebElement path){
-        return alertMessageExtra.getText();
-    }
-    public boolean isAlertVisible( String messageLogin){
-               message = driver.findElement(By.xpath("//span[@class='error']"));
+    public boolean isAlertExtraMessageEmailVisible(String alertMessageEmail){
         return getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit")
-                && getCurrentTitle().equals("Sing In to LinkedIn")
-                && alertMessageExtra.isDisplayed()
-        && message.equals(messageLogin);
-
+                && getCurrentTitle().equals("Sign In to LinkedIn")
+                && alertMessageLoginText.equals(alertMessageEmail);
     }
-    public boolean isPageLoaded(){
-
+    public boolean isAlertExtraMessagePasswordVisible(String alertMessagePassword){
         return getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit")
-                && getCurrentTitle().equals("Sing In to LinkedIn")
-                && alertMessageExtra.isDisplayed();
-
+                && getCurrentTitle().equals("Sign In to LinkedIn")
+                && alertMessagePasswordText.equals(alertMessagePassword);
     }
 }
+
+
