@@ -1,4 +1,3 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,7 +41,7 @@ public class LinkedInLoginPage {
             return (T) new LinkedInHomePage(driver);
         }
         if (getCurrentUrl().contains("/ligin-submit")){
-            return (T) new LinkedInAlertPage(driver);
+            return (T) new LinkedInSubmitPage(driver);
         }
         else {
             return (T) this; //PageFactory.initElements(driver,LinkedInLoginPage.class); - тоже рабочий вариант

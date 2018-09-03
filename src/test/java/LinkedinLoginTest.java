@@ -1,6 +1,4 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -92,7 +90,7 @@ public class LinkedinLoginTest {
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
         linkedInLoginPage.login(userEmail, userPassword);
 
-        LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
+        LinkedInSubmitPage linkedInAlertPage = new LinkedInSubmitPage(driver);
 
         linkedInAlertPage.isAlertMessageForCredentialsVisible(messageLogin,messagePassword);
     }

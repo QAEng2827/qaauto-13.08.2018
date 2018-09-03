@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LinkedInAlertPage {
+public class LinkedInSubmitPage {
     private WebDriver driver;
     @FindBy (xpath = "//span[@id='session_key-login-error']")
     private WebElement alertMessageLoginText;
@@ -12,7 +12,7 @@ public class LinkedInAlertPage {
     @FindBy (xpath = "//span[@id='session_password-login-error']")
     private WebElement alertMessagePasswordText;
 
-    public LinkedInAlertPage (WebDriver driver){
+    public LinkedInSubmitPage(WebDriver driver){
         this.driver=driver;
         PageFactory.initElements(driver, this);
     }
