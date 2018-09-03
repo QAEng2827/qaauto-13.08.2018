@@ -5,9 +5,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
-public class LinkedInLoginPage {
+public class LinkedInLoginPage extends LinkedinBasePage{
 
-   private WebDriver driver;
 
    @FindBy(xpath = "//input[@id = 'login-email']")
    private WebElement userEmailField;
@@ -21,7 +20,7 @@ public class LinkedInLoginPage {
 // конструктор
     public LinkedInLoginPage(WebDriver driver){
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(driver, this); //  просто считывает значения, но не ищет
 
     }
 
@@ -40,7 +39,7 @@ public class LinkedInLoginPage {
         if (getCurrentUrl().contains("/feed")){
             return (T) new LinkedInHomePage(driver);
         }
-        if (getCurrentUrl().contains("/ligin-submit")){
+        if (getCurrentUrl().contains("/login-submit")){
             return (T) new LinkedInSubmitPage(driver);
         }
         else {
@@ -49,13 +48,7 @@ public class LinkedInLoginPage {
 
     }
 
-    public String getCurrentUrl(){
-        return driver.getCurrentUrl();
-    }
 
-   public String getCurrentTitle(){
-        return driver.getTitle();
-   }
 
     public boolean isPageLoaded(){
         return getCurrentUrl().equals("https://www.linkedin.com/")
