@@ -94,10 +94,7 @@ public class LinkedinLoginTest {
 
         LinkedInAlertPage linkedInAlertPage = new LinkedInAlertPage(driver);
 
-        linkedInAlertPage.isAlertExtraMessageEmailVisible(messageLogin);
-        System.out.println(messageLogin);
-        linkedInAlertPage.isAlertExtraMessagePasswordVisible(messagePassword);
-        System.out.println(messagePassword);
+        linkedInAlertPage.isAlertMessageForCredentialsVisible(messageLogin,messagePassword);
     }
 }
 

@@ -25,15 +25,12 @@ public class LinkedInAlertPage {
         return  driver.getTitle();
     }
 
-    public boolean isAlertExtraMessageEmailVisible(String alertMessageEmail){
+
+    public boolean isAlertMessageForCredentialsVisible(String alertMessageEmail, String alertMessagePassword){
         return getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit")
                 && getCurrentTitle().equals("Sign In to LinkedIn")
-                && alertMessageLoginText.equals(alertMessageEmail);
-    }
-    public boolean isAlertExtraMessagePasswordVisible(String alertMessagePassword){
-        return getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit")
-                && getCurrentTitle().equals("Sign In to LinkedIn")
-                && alertMessagePasswordText.equals(alertMessagePassword);
+                && (alertMessageLoginText.equals(alertMessageEmail) || alertMessagePasswordText.equals(alertMessagePassword));
+
     }
 }
 
