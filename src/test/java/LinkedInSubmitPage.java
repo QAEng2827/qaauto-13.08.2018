@@ -32,7 +32,8 @@ public class LinkedInSubmitPage extends LinkedinBasePage{
     public boolean isPageLoaded(){
         return
                getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit")
-               && getCurrentTitle().equals("LinkedIn: Log In or Sign Up")
+               &&
+                       getCurrentTitle().contains("LinkedIn")
                 &&
                         alertMessage.isDisplayed();
 

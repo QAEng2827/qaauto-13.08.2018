@@ -40,6 +40,7 @@ public class LinkedinLoginTest {
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
         LinkedInHomePage linkedInHomePage = linkedInLoginPage.login(userEmail, userPassword);
         Assert.assertTrue(linkedInHomePage.isPageLoaded(), "Home page is not loaded.");
+
     }
 
     @DataProvider

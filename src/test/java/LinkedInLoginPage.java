@@ -42,6 +42,7 @@ public class LinkedInLoginPage extends LinkedinBasePage{
         if (getCurrentUrl().contains("/login-submit")){
             return (T) new LinkedInSubmitPage(driver);
         }
+
         else {
             return (T) this; //PageFactory.initElements(driver,LinkedInLoginPage.class); - тоже рабочий вариант
         }
