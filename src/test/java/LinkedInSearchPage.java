@@ -1,8 +1,8 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -10,58 +10,38 @@ public class LinkedInSearchPage extends LinkedinBasePage{
 
     private WebElement searchField;
 
+    @FindBy(xpath = "//h3[contains(@class, 'search-results__total')]")
+    private WebElement searchResultTotal; // тут массив данных
+
+    @FindBy(xpath = "//li[contains(@class, 'search-result__occluded-item')]")
+    private List<WebElement> searchResults;
+
 
     // конструктор
     public LinkedInSearchPage(WebDriver driver){
         this.driver = driver;
-        initElements();
-    }
-
-    private void initElements() {
-
-        List<WebElement> searchResults = driver.findElements(By.xpath(".//div[@class='blended-srp-results-js pt0 pb4 ph0 container-with-shadow']/ul/li"));
-
-        System.out.println("Search results count: "+ searchResults.size());
-
-        int searchResultsCount = searchResults.size();
-
-        // распечатать все результаті поиска
-
-        for (WebElement searchResult : searchResults) {
-            String searchResultText = searchResult.getText();
-            System.out.println(searchResultText);
-
-            //  проверка есть ли искомое слово в резултатах, приводим к нижнему регистру
-
-            if (searchResultText.toLowerCase().contains("HR")){
-
-                System.out.println("SearchTerm found");
-
-            }
-            else {
-                System.out.println("SearchTerm not found");
-            }
-        }
-
-        //проверки, что есть именно то колисчество результатов
-
-        if (searchResultsCount == 10){
-            System.out.println("Search results count is correct: " + searchResultsCount);
-
-        }
-        else {
-            System.out.println("Search results count is incorrect: " + searchResultsCount);
-        }
-
-//        driver.close();
-
-
+        PageFactory.initElements(driver, this);
     }
 
     public boolean isPageLoaded(){
+        return driver.getCurrentUrl().contains("search/results/")
+                && getCurrentTitle().contains("| Search | LinkedIn") &&
+                searchResultTotal.isDisplayed();
+    }
 
-        return driver.getCurrentUrl().equals("https://www.linkedin.com/search/results/all/?keywords=HR&origin=GLOBAL_SEARCH_HEADER");
-
+    public int getSearchResultsNumber() {
+      return searchResults.size();
 
     }
+
+    public List<String> getSearchResultsList() {
+        List<String> serchResultsList = new ArrayList<String>();
+
+        for (WebElement searchResult : searchResults) {
+            ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", searchResult);
+            serchResultsList.add(searchResult.getText());
+        }
+        return serchResultsList;
+    }
+
 }

@@ -8,13 +8,15 @@ import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Thread.sleep;
+
 public class LinkedInHomePage extends LinkedinBasePage {
 
 
     @FindBy(xpath = "//li[@id='profile-nav-item']" )
     private WebElement profileNavItem;
 
-    @FindBy(xpath = "//input[@role='combobox']" )
+    @FindBy(xpath = "//input[@placeholder and @role='combobox']" )
     private WebElement searchField;
 
 
@@ -48,5 +50,16 @@ public class LinkedInHomePage extends LinkedinBasePage {
         return new LinkedInSearchPage(driver);
     //   searchField.sendKeys(Keys.ENTER);
 
+    }
+
+    public LinkedInSearchPage search(String searchTerm) {
+        searchField.sendKeys(searchTerm);
+        searchField.sendKeys(Keys.ENTER);
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedInSearchPage(driver);
     }
 }
