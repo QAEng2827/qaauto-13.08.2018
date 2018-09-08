@@ -35,47 +35,47 @@ public class LinkedinForgotPasswordTest {
     @DataProvider
     public Object[][] newPasswordProvider() {
         return new Object[][]{
-               {"", "crokodile1"},
+               {"qaeng2728@gmail.com", "crokodile1","crokodile1"},
            //     {"", "crokodile2"},
         };
     }
 
-///* - Open login page
-//- Verify login page is loaded - done
-//
-//- Press "Forgot password?"
-//
-//- Verify 'https://www.linkedin.com/uas/request-password-reset?trk=uno-reg-guest-home-forgot-password' page is loaded
-//
-// Positive test
-//- Search field for 'email or phone' and 'Find account' button
-//- input valid email in it and click on 'Find account' button
-//- Verify https://www.linkedin.com/checkpoint/rp/request-password-reset-submit page is loaded
-//- sleep 12 000 (2 min)
-//- enter new link from e-mail
-//- Verify "https://www.linkedin.com/checkpoint/rp/password-reset?requestSubmissionId" page ( messages "Finally, choose a new password." and
-//"Password must include at least 8 characters including at least 1 number or 1 special character.", 'new password' field and
-//'Retype new password'field and 'Submit' button)
-//- Input new password in the fields an click on 'Submit'-button
-//- Verify https://www.linkedin.com/checkpoint/rp/password-reset-submit page is loaded (message "Your password has been changed successfully",
-//"Go to homepage" button)
-//- click on "Go to homepage" button
-//- Verify home page is loaded
-//
-//     Negativ test
-//
-//     - input ivalid email in it and click on 'Find account' button
-//- Verify https://www.linkedin.com/checkpoint/rp/request-password-reset-submit page is loaded
-//-
-//
-//
-//    */
+/* - Open login page
+- Verify login page is loaded - done
+
+- Press "Forgot password?" - done
+
+- Verify 'https://www.linkedin.com/uas/request-password-reset?trk=uno-reg-guest-home-forgot-password' page is loaded -done
+
+ Positive test
+- Search field for 'email or phone' and 'Find account' button - done
+- input valid email in it and click on 'Find account' button
+- Verify https://www.linkedin.com/checkpoint/rp/request-password-reset-submit page is loaded
+- sleep 12 000 (2 min)
+- enter new link from e-mail
+- Verify "https://www.linkedin.com/checkpoint/rp/password-reset?requestSubmissionId" page ( messages "Finally, choose a new password." and
+"Password must include at least 8 characters including at least 1 number or 1 special character.", 'new password' field and
+'Retype new password'field and 'Submit' button)
+- Input new password in the fields an click on 'Submit'-button
+- Verify https://www.linkedin.com/checkpoint/rp/password-reset-submit page is loaded (message "Your password has been changed successfully",
+"Go to homepage" button)
+- click on "Go to homepage" button
+- Verify home page is loaded
+
+     Negativ test
+
+     - input ivalid email in it and click on 'Find account' button
+- Verify https://www.linkedin.com/checkpoint/rp/request-password-reset-submit page is loaded
+-
+
+
+    */
     @Test(dataProvider= "newPasswordProvider")
-    public void positiveForgotPasswordTest(String userEmail, String userNewPassword) {
+    public void positiveForgotPasswordTest(String userEmail, String userNewPassword, String userNewPasswordRetype) {
 
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
         LinkedinFirstRequestPasswordResetPage linkedinFirstRequestPasswordResetPage = linkedInLoginPage.isLoadFirstRequestPasswordResetPage();
-//    Assert.assertTrue(linkedinFirstRequestPasswordResetPage.isPageLoaded(), "First request Password reset page is not loaded.");
+        Assert.assertTrue(linkedinFirstRequestPasswordResetPage.isPageLoaded(), "First request Password reset page is not loaded.");
 //    LinkedinRequestPasswordResetSubmitPage linkedinRequestPasswordResetSubmitPage = linkedinFirstRequestPasswordResetPage.isLoadedRequestPasswordResetSubmitPage();
 //    Assert.assertTrue();
 

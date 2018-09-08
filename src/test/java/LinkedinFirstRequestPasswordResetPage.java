@@ -37,8 +37,8 @@ public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage{
         }
 
     public boolean isPageLoaded() {
-        return driver.getCurrentUrl().contains("search/results/")
-                && getCurrentTitle().contains("| Search | LinkedIn")
+        return driver.getCurrentUrl().contains("/uas/request-password-reset")
+                && getCurrentTitle().contains("Reset Password | LinkedIn")
                 && emailPhoneField.isDisplayed()
                 && hederFirstRequestPasswordResetPage.isDisplayed()
                 && findAccountButton.isDisplayed();
