@@ -1,7 +1,10 @@
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
@@ -15,7 +18,10 @@ public class LinkedInLoginPage extends LinkedinBasePage{
    private WebElement userPasswordField;
 
    @FindBy(xpath = "//input[@id='login-submit']" )
-   private WebElement signInButton;
+    private WebElement signInButton;
+
+    @FindBy(xpath = "//a[@class ='link-forgot-password']" )
+    private WebElement forgotPasswordLink;
 
 // конструктор
     public LinkedInLoginPage(WebDriver driver){
@@ -42,6 +48,9 @@ public class LinkedInLoginPage extends LinkedinBasePage{
         if (getCurrentUrl().contains("/login-submit")){
             return (T) new LinkedInSubmitPage(driver);
         }
+//        if (getCurrentUrl().contains("/uas/request-password-reset")){
+//            return (T) new LinkedinFirstRequestPasswordresetPage(driver);
+//        }
 
         else {
             return (T) this; //PageFactory.initElements(driver,LinkedInLoginPage.class); - тоже рабочий вариант
@@ -64,4 +73,19 @@ public class LinkedInLoginPage extends LinkedinBasePage{
                 && signInButton.isEnabled();
 
     }
+
+
+ public LinkedinFirstRequestPasswordResetPage isLoadFirstRequestPasswordResetPage (){
+    forgotPasswordLink.click();
+     try {
+         sleep(300);
+     } catch (InterruptedException e) {
+         e.printStackTrace();
+     }
+
+       driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+      return new LinkedinFirstRequestPasswordResetPage(driver);
+
+   }
 }

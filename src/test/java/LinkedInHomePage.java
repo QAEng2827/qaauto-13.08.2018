@@ -28,10 +28,6 @@ public class LinkedInHomePage extends LinkedinBasePage {
         PageFactory.initElements(driver, this);
     }
 
-//    private void initElements() {
-//
-//        profileNavItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-//    }
 
 
     public boolean isPageLoaded(){
