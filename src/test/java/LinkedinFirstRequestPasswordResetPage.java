@@ -1,9 +1,12 @@
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage{
    // private WebElement searchField;
@@ -45,4 +48,16 @@ public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage{
 
     }
 
+    public LinkedinRequestPasswordResetSubmitPage isLoadedRequestPasswordResetSubmitPage(String userEmailOrPhone) {
+        emailPhoneField.sendKeys(userEmailOrPhone);
+        emailPhoneField.sendKeys(Keys.ENTER);
+      //  findAccountButton.click();
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedinRequestPasswordResetSubmitPage(driver);
+
+    }
 }
