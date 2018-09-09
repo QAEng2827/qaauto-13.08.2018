@@ -83,9 +83,7 @@ public class LinkedInLoginPage extends LinkedinBasePage{
          e.printStackTrace();
      }
 
-       driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-      return new LinkedinFirstRequestPasswordResetPage(driver);
+     return new LinkedinFirstRequestPasswordResetPage(driver);
 
    }
 }

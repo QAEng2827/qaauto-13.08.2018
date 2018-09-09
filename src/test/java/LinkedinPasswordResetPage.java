@@ -20,13 +20,13 @@ public class LinkedinPasswordResetPage  extends LinkedinBasePage {
     @FindBy(xpath = "//h2[@class='form__subtitle']")
     private WebElement subtitleMessage;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//input[@id='newPassword']")
     private WebElement newPasswordField;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//input[@id='confirmPassword']")
     private WebElement retypeNewPasswordField;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//button[@id='reset-password-submit-button']")
     private WebElement submitButton;
 
 
@@ -38,7 +38,7 @@ public class LinkedinPasswordResetPage  extends LinkedinBasePage {
     }
 
     public boolean isPageLoaded() {
-        return driver.getCurrentUrl().contains("/checkpoint/rp/request-password-reset-submit")
+        return driver.getCurrentUrl().contains("/checkpoint/rp/")
                 //&& getCurrentTitle().contains("Please check your email for reset password link | LinkedIn");
 
                 && hederPasswordResetPage.isDisplayed()
@@ -52,13 +52,14 @@ public class LinkedinPasswordResetPage  extends LinkedinBasePage {
     public LinkedinPasswordResetSubmitPage isLoadedPasswordResetSubmitPage(String userNewPassword, String userNewPasswordRetype) {
         newPasswordField.sendKeys(userNewPassword);
         retypeNewPasswordField.sendKeys(userNewPasswordRetype);
+        submitButton.click();
 
         try {
             sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         return new LinkedinPasswordResetSubmitPage(driver);
 
     }

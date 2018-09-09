@@ -39,18 +39,15 @@ public class LinkedinPasswordResetSubmitPage  extends LinkedinBasePage {
                 && goToHomepageButton.isDisplayed();
 
     }
-// надо закуклить на homepage
-//    public LinkedinPasswordResetSubmitPage isLoadedPasswordResetSubmitPage(String userNewPassword, String userNewPasswordRetype) {
-//        newPasswordField.sendKeys(userNewPassword);
-//        retypeNewPasswordField.sendKeys(userNewPasswordRetype);
-//
-//        try {
-//            sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        return new LinkedinPasswordResetSubmitPage(driver);
-//
-//    }
+
+    public LinkedInHomePage isHomePageLoaded(){
+    goToHomepageButton.click();
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedInHomePage(driver);
+
+    }
 }

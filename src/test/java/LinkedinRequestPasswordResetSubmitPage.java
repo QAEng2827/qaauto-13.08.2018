@@ -45,13 +45,15 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
     }
 // проверить работу
     public LinkedinPasswordResetPage isLoadedPasswordResetPage() {
+   //     return new LinkedinPasswordResetPage(driver);
 
         try {
-            sleep(12000);
+            sleep(60000);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         return new LinkedinPasswordResetPage(driver);
 
     }

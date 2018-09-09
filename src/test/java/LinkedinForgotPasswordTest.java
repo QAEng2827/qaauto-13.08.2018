@@ -51,8 +51,8 @@ public class LinkedinForgotPasswordTest {
 - Search field for 'email or phone' and 'Find account' button - done
 - input valid email in it and click on 'Find account' button - done
 - Verify https://www.linkedin.com/checkpoint/rp/request-password-reset-submit page is loaded - done
-- sleep 12 000 (2 min)
-- enter new link from e-mail
+- sleep 12 0000 (2 min)- done
+- enter new link from e-mail - done
 - Verify "https://www.linkedin.com/checkpoint/rp/password-reset?requestSubmissionId" page ( messages "Finally, choose a new password." and
 "Password must include at least 8 characters including at least 1 number or 1 special character.", 'new password' field and
 'Retype new password'field and 'Submit' button)
@@ -82,7 +82,17 @@ public class LinkedinForgotPasswordTest {
         Assert.assertTrue(linkedinFirstRequestPasswordResetPage.isPageLoaded(), "First request Password reset page is not loaded.");
         LinkedinRequestPasswordResetSubmitPage linkedinRequestPasswordResetSubmitPage = linkedinFirstRequestPasswordResetPage.isLoadedRequestPasswordResetSubmitPage(userEmailOrPhone);
         Assert.assertTrue(linkedinRequestPasswordResetSubmitPage.isPageLoaded(), "Please check you email page is not loaded.");
-      //  LinkedinResetYourPassword linkedinResetYourPassword = linkedinRequestPasswordResetSubmitPage.isLoadedResetYourPassword(userNewPassword, userNewPasswordRetype)
+        // here sleep?
+
+        LinkedinPasswordResetPage linkedinPasswordResetPage = linkedinRequestPasswordResetSubmitPage.isLoadedPasswordResetPage();
+        Assert.assertTrue(linkedinPasswordResetPage.isPageLoaded(), "'Enter new password' page is not loaded.");
+        LinkedinPasswordResetSubmitPage linkedinPasswordResetSubmitPage = linkedinPasswordResetPage.isLoadedPasswordResetSubmitPage(userNewPassword, userNewPasswordRetype);
+        Assert.assertTrue(linkedinPasswordResetSubmitPage.isPageLoaded(), "'Your password has been changed' page is not loaded.");
+        LinkedInHomePage linkedInHomePage = linkedinPasswordResetSubmitPage.isHomePageLoaded();
+        Assert.assertTrue(linkedInHomePage.isPageLoaded(), "Home page is not loaded");
+
+
+     //   LinkedinResetYourPassword linkedinResetYourPassword = linkedinRequestPasswordResetSubmitPage.isLoadedResetYourPassword(userNewPassword, userNewPasswordRetype)
 
     }
 
