@@ -78,7 +78,7 @@ public class LinkedInLoginPage extends LinkedinBasePage{
  public LinkedinFirstRequestPasswordResetPage isLoadFirstRequestPasswordResetPage (){
     forgotPasswordLink.click();
      try {
-         sleep(300);
+         sleep(3000);
      } catch (InterruptedException e) {
          e.printStackTrace();
      }

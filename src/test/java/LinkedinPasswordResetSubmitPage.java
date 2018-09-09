@@ -30,11 +30,10 @@ public class LinkedinPasswordResetSubmitPage  extends LinkedinBasePage {
     }
 
     public boolean isPageLoaded() {
-        return driver.getCurrentUrl().contains("/checkpoint/rp/request-password-reset-submit")
+        return driver.getCurrentUrl().contains("/checkpoint/rp/password-reset-submit")
                 //&& getCurrentTitle().contains("Please check your email for reset password link | LinkedIn");
 
-                && headerPasswordResetSubmitPage.isDisplayed()
-                && subtitleMessage.isDisplayed()
+             //   && headerPasswordResetSubmitPage.isDisplayed()
 
                 && goToHomepageButton.isDisplayed();
 
