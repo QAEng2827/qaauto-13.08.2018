@@ -12,7 +12,7 @@ public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage{
    // private WebElement searchField;
 
     @FindBy(xpath = "//div[@class='app__content']/header")
-    private WebElement hederFirstRequestPasswordResetPage;
+    private WebElement headerFirstRequestPasswordResetPage;
 
     @FindBy (xpath = "//nav/a[@class='nav__button--signin']")
     private WebElement sinInButton;
@@ -43,7 +43,7 @@ public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage{
         return driver.getCurrentUrl().contains("/uas/request-password-reset")
                 && getCurrentTitle().contains("Reset Password | LinkedIn")
                 && emailPhoneField.isDisplayed()
-                && hederFirstRequestPasswordResetPage.isDisplayed()
+                && headerFirstRequestPasswordResetPage.isDisplayed()
                 && findAccountButton.isDisplayed();
 
     }
@@ -58,6 +58,9 @@ public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage{
             e.printStackTrace();
         }
         return new LinkedinRequestPasswordResetSubmitPage(driver);
+    }
 
+    public String getHeaderMessageText(){
+        return headerFirstRequestPasswordResetPage.getText();
     }
 }

@@ -9,7 +9,7 @@ import static java.lang.Thread.sleep;
 
 public class LinkedinPasswordResetPage  extends LinkedinBasePage {
     @FindBy(xpath = "//div[@class='app__content']/header")
-    private WebElement hederPasswordResetPage;
+    private WebElement headerPasswordResetPage;
 
     @FindBy (xpath = "//nav/a[@class='nav__button--signin']")
     private WebElement sinInButton;
@@ -41,7 +41,7 @@ public class LinkedinPasswordResetPage  extends LinkedinBasePage {
         return driver.getCurrentUrl().contains("/checkpoint/rp/")
                 //&& getCurrentTitle().contains("Please check your email for reset password link | LinkedIn");
 
-                && hederPasswordResetPage.isDisplayed()
+                && headerPasswordResetPage.isDisplayed()
                 && subtitleMessage.isDisplayed()
                 && newPasswordField.isDisplayed()
                 && retypeNewPasswordField.isDisplayed()
@@ -62,5 +62,9 @@ public class LinkedinPasswordResetPage  extends LinkedinBasePage {
 
         return new LinkedinPasswordResetSubmitPage(driver);
 
+    }
+
+    public String getHeaderMessageText(){
+        return headerPasswordResetPage.getText();
     }
 }

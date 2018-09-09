@@ -13,7 +13,7 @@ public class LinkedinPasswordResetSubmitPage  extends LinkedinBasePage {
     private WebElement backToLinkedinLink;
 
     @FindBy(xpath = "//header[@class='content__header'")
-    private WebElement hederPasswordResetSubmitPage;
+    private WebElement headerPasswordResetSubmitPage;
 
     @FindBy(xpath = "//h2[@class='form__subtitle']")
     private WebElement subtitleMessage;
@@ -33,7 +33,7 @@ public class LinkedinPasswordResetSubmitPage  extends LinkedinBasePage {
         return driver.getCurrentUrl().contains("/checkpoint/rp/request-password-reset-submit")
                 //&& getCurrentTitle().contains("Please check your email for reset password link | LinkedIn");
 
-                && hederPasswordResetSubmitPage.isDisplayed()
+                && headerPasswordResetSubmitPage.isDisplayed()
                 && subtitleMessage.isDisplayed()
 
                 && goToHomepageButton.isDisplayed();
@@ -50,4 +50,8 @@ public class LinkedinPasswordResetSubmitPage  extends LinkedinBasePage {
         return new LinkedInHomePage(driver);
 
     }
+    public String getHeaderMessageText(){
+        return headerPasswordResetSubmitPage.getText();
+    }
+
 }
