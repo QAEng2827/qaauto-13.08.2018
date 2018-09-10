@@ -1,12 +1,14 @@
+package page;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import page.LinkedinBasePage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class LinkedInSearchPage extends LinkedinBasePage{
+public class LinkedInSearchPage extends LinkedinBasePage {
 
     private WebElement searchField;
 

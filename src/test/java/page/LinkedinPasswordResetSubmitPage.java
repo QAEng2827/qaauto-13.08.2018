@@ -1,9 +1,11 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.concurrent.TimeUnit;
+import page.LinkedInHomePage;
+import page.LinkedinBasePage;
 
 import static java.lang.Thread.sleep;
 

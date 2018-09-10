@@ -1,14 +1,15 @@
-import org.openqa.selenium.Keys;
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
+import page.LinkedinBasePage;
+import util.GMailService;
 
 import static java.lang.Thread.sleep;
 
-public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage{
+public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage {
    // private WebElement searchField;
 
     @FindBy(xpath = "//div[@class='app__content']/header")
@@ -48,10 +49,22 @@ public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage{
 
     }
 
-    public LinkedinRequestPasswordResetSubmitPage isLoadedRequestPasswordResetSubmitPage(String userEmailOrPhone) {
+    public LinkedinRequestPasswordResetSubmitPage findAccount(String userEmailOrPhone) {
+        GMailService gMailService = new GMailService();
+        gMailService.connect();
+
         emailPhoneField.sendKeys(userEmailOrPhone);
-        emailPhoneField.sendKeys(Keys.ENTER);
-      //  findAccountButton.click();
+             // emailPhoneField.sendKeys(Keys.ENTER);
+       findAccountButton.click();
+
+// перенести в метод где переходим в навигейт то линк
+            String messageSubject = "here's the link to reset your password";
+            String messageTo = "qaeng2728@gmail.com";
+            String messageFrom = "security-noreply@linkedin.com";
+
+            String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
+            System.out.println("Content: " + message);
+
         try {
             sleep(3000);
         } catch (InterruptedException e) {

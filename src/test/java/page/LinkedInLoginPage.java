@@ -1,14 +1,13 @@
-import org.openqa.selenium.Keys;
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.concurrent.TimeUnit;
-
 import static java.lang.Thread.sleep;
 
-public class LinkedInLoginPage extends LinkedinBasePage{
+public class LinkedInLoginPage extends LinkedinBasePage {
 
 
    @FindBy(xpath = "//input[@id = 'login-email']")
@@ -75,7 +74,7 @@ public class LinkedInLoginPage extends LinkedinBasePage{
     }
 
 
- public LinkedinFirstRequestPasswordResetPage isLoadFirstRequestPasswordResetPage (){
+ public LinkedinFirstRequestPasswordResetPage clickOnForgotPassword(){
     forgotPasswordLink.click();
      try {
          sleep(3000);

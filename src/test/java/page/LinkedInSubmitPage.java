@@ -1,12 +1,14 @@
+package page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import page.LinkedinBasePage;
 
 import static java.lang.Thread.sleep;
 
-public class LinkedInSubmitPage extends LinkedinBasePage{
+public class LinkedInSubmitPage extends LinkedinBasePage {
 
 
     @FindBy(xpath ="//div[@role= 'alert']")

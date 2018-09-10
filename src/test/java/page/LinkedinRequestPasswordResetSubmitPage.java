@@ -1,10 +1,9 @@
-import org.openqa.selenium.Keys;
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
@@ -44,11 +43,11 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
 
     }
 // проверить работу
-    public LinkedinPasswordResetPage isLoadedPasswordResetPage() {
+    public LinkedinPasswordResetPage checkEmail() {
    //     return new LinkedinPasswordResetPage(driver);
 
         try {
-            sleep(60000);
+            sleep(30000);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
