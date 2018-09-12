@@ -63,7 +63,10 @@ public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage {
             String messageFrom = "security-noreply@linkedin.com";
 
             String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
-            System.out.println("Content: " + message);
+
+            driver.get(exstractResetLink(message));
+
+        System.out.println("Link for reset: " + message);
 
         try {
             sleep(3000);
@@ -71,6 +74,28 @@ public class LinkedinFirstRequestPasswordResetPage extends LinkedinBasePage {
             e.printStackTrace();
         }
         return new LinkedinRequestPasswordResetSubmitPage(driver);
+    }
+
+    private  String exstractResetLink(String message) {
+        String linkSearchStringBegin =  "https://www.linkedin.com/e/";
+
+        String incorrectLink;
+        String correctLink;
+
+        int beginResetLink = message.indexOf(linkSearchStringBegin);
+
+        String substringBegin = message.substring(beginResetLink);
+        System.out.println("LinkBegin: " + substringBegin);
+        int endResetLink = substringBegin.indexOf("\"");
+
+        incorrectLink = substringBegin.substring(0, endResetLink);
+
+        System.out.println(incorrectLink);
+
+        correctLink = incorrectLink.replaceAll("&amp;", "");
+        System.out.println(correctLink);
+        return correctLink;
+
     }
 
     public String getHeaderMessageText(){
