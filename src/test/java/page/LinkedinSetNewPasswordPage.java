@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
-public class LinkedinPasswordResetPage  extends LinkedinBasePage {
+public class LinkedinSetNewPasswordPage extends LinkedinBasePage {
     @FindBy(xpath = "//div[@class='app__content']/header")
     private WebElement headerPasswordResetPage;
 
@@ -31,7 +31,7 @@ public class LinkedinPasswordResetPage  extends LinkedinBasePage {
 
 
     // конструктор
-    public LinkedinPasswordResetPage(WebDriver driver){
+    public LinkedinSetNewPasswordPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
 

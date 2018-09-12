@@ -5,6 +5,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import page.*;
 
+import static java.lang.Thread.sleep;
+
 public class LinkedinForgotPasswordTest extends LinkedinBaseTest{
 
     @DataProvider
@@ -43,7 +45,7 @@ public class LinkedinForgotPasswordTest extends LinkedinBaseTest{
 
     */
     @Test(dataProvider= "newPasswordProvider")
-    public void positiveForgotPasswordTest(String userEmailOrPhone, String userNewPassword, String userNewPasswordRetype) {
+    public void positiveForgotPasswordTest(String userEmailOrPhone, String userNewPassword, String userNewPasswordRetype) throws InterruptedException {
 
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
 
@@ -52,12 +54,14 @@ public class LinkedinForgotPasswordTest extends LinkedinBaseTest{
         Assert.assertTrue(linkedinRequestPasswordResetPage.isPageLoaded(),
                 "First request Password reset page is not loaded.");
 
-        LinkedinRequestPasswordResetSubmitPage linkedinPasswordResetSubmitPage =
+        LinkedinPasswordResetSubmitPage linkedinPasswordResetSubmitPage =
                 linkedinRequestPasswordResetPage.findAccount(userEmailOrPhone);
+
+        sleep(180000);
         Assert.assertTrue(linkedinPasswordResetSubmitPage.isPageLoaded(),
                 "'Please check you email' page is not loaded.");
 
-        LinkedinPasswordResetPage linkedinSetNewPasswordPage =
+        LinkedinSetNewPasswordPage linkedinSetNewPasswordPage =
                 linkedinPasswordResetSubmitPage.navigateToLinkFromEmail();
         Assert.assertTrue(linkedinSetNewPasswordPage.isPageLoaded(),
                 "'Enter new password' page is not loaded.");

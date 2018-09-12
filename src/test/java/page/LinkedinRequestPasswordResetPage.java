@@ -4,8 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import page.LinkedinBasePage;
-import util.GMailService;
 
 import static java.lang.Thread.sleep;
 
@@ -49,7 +47,7 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
 
     }
 
-    public LinkedinRequestPasswordResetSubmitPage findAccount(String userEmailOrPhone) {
+    public LinkedinPasswordResetSubmitPage findAccount(String userEmailOrPhone) {
 
         gMailService.connect();
 
@@ -57,12 +55,18 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
              // emailPhoneField.sendKeys(Keys.ENTER);
        findAccountButton.click();
 
-         try {
-            sleep(30000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new LinkedinRequestPasswordResetSubmitPage(driver);
+//        String messageSubject = "here's the link to reset your password";
+//        String messageTo = "qaeng2728@gmail.com";
+//        String messageFrom = "security-noreply@linkedin.com";
+//
+//        String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 400);
+//        String correctResetPasswordLink = exstractResetLink(message);
+//
+//        driver.get(correctResetPasswordLink);
+//
+//        System.out.println("Link for reset: " + correctResetPasswordLink);
+
+           return new LinkedinPasswordResetSubmitPage(driver);
     }
 
 //    private  String exstractResetLink(String message) {
@@ -81,13 +85,11 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
 //
 //        System.out.println(incorrectLink);
 //
-//        correctLink = incorrectLink.replaceAll("&amp;", "");
+//        correctLink = incorrectLink.replaceAll("amp;", "");
 //        System.out.println("Go ahead: "+correctLink);
 //        return correctLink;
 //
 //    }
 
-    public String getHeaderMessageText(){
-        return headerFirstRequestPasswordResetPage.getText();
-    }
+
 }

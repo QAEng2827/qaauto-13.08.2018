@@ -4,12 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import util.GMailService;
 
 
 import static java.lang.Thread.sleep;
 
-public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
+public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
 
     @FindBy(xpath = "//div[@class='app__content']/header")
     private WebElement headerRequestPasswordResetSubmitPage;
@@ -30,7 +29,7 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
     private WebElement tryDifferentEmailButton;
 
     // конструктор
-    public LinkedinRequestPasswordResetSubmitPage(WebDriver driver){
+    public LinkedinPasswordResetSubmitPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
 
@@ -45,33 +44,18 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
 
     }
 // проверить работу
-    public LinkedinPasswordResetPage navigateToLinkFromEmail() {
-        try {
-            sleep(400);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
 
         String messageSubject = "here's the link to reset your password";
         String messageTo = "qaeng2728@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
 
-        String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 400);
+        String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 360);
+     //   System.out.println("HTML text:"+ message);
         String correctResetPasswordLink = exstractResetLink(message);
-
+        System.out.println("LINK To change your LinkedIn password: " + correctResetPasswordLink);
         driver.get(correctResetPasswordLink);
-
-        System.out.println("Link for reset: " + correctResetPasswordLink);
-
-//        try {
-//            sleep(400);
-//
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
-        return new LinkedinPasswordResetPage(driver);
+        return new LinkedinSetNewPasswordPage(driver);
     }
 
     private  String exstractResetLink(String message) {
@@ -90,16 +74,10 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
 
         System.out.println(incorrectLink);
 
-        correctLink = incorrectLink.replaceAll("&amp;", "");
+        correctLink = incorrectLink.replaceAll("amp;", "");
         System.out.println(correctLink);
         return correctLink;
 
     }
-
-
-    public String getHeaderMessageText(){
-        return headerRequestPasswordResetSubmitPage.getText();
-    }
-
 
 }
