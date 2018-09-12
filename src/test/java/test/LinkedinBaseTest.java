@@ -23,6 +23,7 @@ public void beforeMethod() {
 
         driver.quit();
     }
+
 }
 
 

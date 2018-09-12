@@ -49,7 +49,7 @@ public class LinkedinPasswordResetPage  extends LinkedinBasePage {
 
     }
 
-    public LinkedinPasswordResetSubmitPage resetPassword(String userNewPassword, String userNewPasswordRetype) {
+    public LinkedinSuccessfulPasswordResetPage submitNewPassword(String userNewPassword, String userNewPasswordRetype) {
         newPasswordField.sendKeys(userNewPassword);
         retypeNewPasswordField.sendKeys(userNewPasswordRetype);
         submitButton.click();
@@ -60,7 +60,7 @@ public class LinkedinPasswordResetPage  extends LinkedinBasePage {
             e.printStackTrace();
         }
 
-        return new LinkedinPasswordResetSubmitPage(driver);
+        return new LinkedinSuccessfulPasswordResetPage(driver);
 
     }
 

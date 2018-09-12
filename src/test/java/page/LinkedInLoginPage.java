@@ -74,7 +74,7 @@ public class LinkedInLoginPage extends LinkedinBasePage {
     }
 
 
- public LinkedinFirstRequestPasswordResetPage clickOnForgotPassword(){
+ public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink(){
     forgotPasswordLink.click();
      try {
          sleep(3000);
@@ -82,7 +82,7 @@ public class LinkedInLoginPage extends LinkedinBasePage {
          e.printStackTrace();
      }
 
-     return new LinkedinFirstRequestPasswordResetPage(driver);
+     return new LinkedinRequestPasswordResetPage(driver);
 
    }
 }

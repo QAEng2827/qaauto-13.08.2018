@@ -9,7 +9,7 @@ import page.LinkedinBasePage;
 
 import static java.lang.Thread.sleep;
 
-public class LinkedinPasswordResetSubmitPage  extends LinkedinBasePage {
+public class LinkedinSuccessfulPasswordResetPage extends LinkedinBasePage {
 
     @FindBy(xpath = "//a[@class='nav__base--logged-in nav__button--back-to-linkedin'")
     private WebElement backToLinkedinLink;
@@ -25,7 +25,7 @@ public class LinkedinPasswordResetSubmitPage  extends LinkedinBasePage {
 
 
     // конструктор
-    public LinkedinPasswordResetSubmitPage(WebDriver driver){
+    public LinkedinSuccessfulPasswordResetPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
 
@@ -41,7 +41,7 @@ public class LinkedinPasswordResetSubmitPage  extends LinkedinBasePage {
 
     }
 
-    public LinkedInHomePage isHomePageLoaded(){
+    public LinkedInHomePage clickOnGoToHomeButton(){
     goToHomepageButton.click();
         try {
             sleep(3000);
