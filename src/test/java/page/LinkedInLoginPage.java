@@ -7,6 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * LinkedInLogin Page object class.
+ */
 public class LinkedInLoginPage extends LinkedinBasePage {
 
 
@@ -23,6 +26,13 @@ public class LinkedInLoginPage extends LinkedinBasePage {
     private WebElement forgotPasswordLink;
 
 // конструктор
+
+
+    /**
+     * Constructor for linkedInLoginPage;
+     *
+     * @param driver -  driver instance fom test,  КС-приложение между библиотекой вебдрейверa и браузерom.
+     */
     public LinkedInLoginPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this); //  просто считывает значения, но не ищет
@@ -30,7 +40,14 @@ public class LinkedInLoginPage extends LinkedinBasePage {
     }
 
 
-
+    /**
+     * User login by username/password
+     *
+     * @param userEmail - String with userEmail.
+     * @param userPassword -String with userPassword.
+     * @param <T> - generic type to return different PageObjects.
+     * @return one of correcsponding PageObjects linkedInLoginPage/LinkedInHomePage/LinkedInSubmitPage/
+     */
     public <T> T login(String userEmail, String userPassword){
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
@@ -47,9 +64,6 @@ public class LinkedInLoginPage extends LinkedinBasePage {
         if (getCurrentUrl().contains("/login-submit")){
             return (T) new LinkedInSubmitPage(driver);
         }
-//        if (getCurrentUrl().contains("/uas/request-password-reset")){
-//            return (T) new LinkedinFirstRequestPasswordresetPage(driver);
-//        }
 
         else {
             return (T) this; //PageFactory.initElements(driver,LinkedInLoginPage.class); - тоже рабочий вариант

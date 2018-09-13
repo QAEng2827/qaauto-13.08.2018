@@ -23,6 +23,7 @@ public class LinkedInSearchPage extends LinkedinBasePage {
     public LinkedInSearchPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        waitUntilElementVisible(searchResultTotal, 10)
     }
 
     public boolean isPageLoaded(){

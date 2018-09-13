@@ -55,6 +55,12 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
              // emailPhoneField.sendKeys(Keys.ENTER);
        findAccountButton.click();
 
+        try {
+            sleep(18000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 //        String messageSubject = "here's the link to reset your password";
 //        String messageTo = "qaeng2728@gmail.com";
 //        String messageFrom = "security-noreply@linkedin.com";
