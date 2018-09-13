@@ -53,6 +53,7 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
         String messageFrom = "security-noreply@linkedin.com";
         String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
 
+
         System.out.println("HTML text:"+ message);
         String resetPasswordLink =
                 StringUtils.substringBetween(message,
