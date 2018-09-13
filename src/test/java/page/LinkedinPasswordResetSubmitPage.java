@@ -27,10 +27,12 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
 
     @FindBy(xpath = "//a[contains(@class, 'different__email--desktop')]")
     private WebElement tryDifferentEmailButton;
+    private String message;
 
     // конструктор
-    public LinkedinPasswordResetSubmitPage(WebDriver driver){
+    public LinkedinPasswordResetSubmitPage(WebDriver driver, String message){
         this.driver = driver;
+        this.message = message;
         PageFactory.initElements(driver, this);
 
     }
@@ -46,15 +48,15 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
 // проверить работу
     public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
 
-        String messageSubject = "here's the link to reset your password";
-        String messageTo = "qaeng2728@gmail.com";
-        String messageFrom = "security-noreply@linkedin.com";
+//        String messageSubject = "here's the link to reset your password";
+//        String messageTo = "qaeng2728@gmail.com";
+//        String messageFrom = "security-noreply@linkedin.com";
+//        String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
+//        System.out.println("HTML text:"+ message);
+        String resetPasswordLink = exstractResetLink(message);
+        System.out.println("LINK To change your LinkedIn password: " + resetPasswordLink);
+        driver.get(resetPasswordLink);
 
-        String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 360);
-     //   System.out.println("HTML text:"+ message);
-        String correctResetPasswordLink = exstractResetLink(message);
-        System.out.println("LINK To change your LinkedIn password: " + correctResetPasswordLink);
-        driver.get(correctResetPasswordLink);
         return new LinkedinSetNewPasswordPage(driver);
     }
 
@@ -74,7 +76,7 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
 
         System.out.println(incorrectLink);
 
-        correctLink = incorrectLink.replaceAll("amp;", "");
+        correctLink = incorrectLink.replaceAll("&amp;", "&");
         System.out.println(correctLink);
         return correctLink;
 

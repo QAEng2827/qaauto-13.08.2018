@@ -57,7 +57,7 @@ public class LinkedinForgotPasswordTest extends LinkedinBaseTest{
         LinkedinPasswordResetSubmitPage linkedinPasswordResetSubmitPage =
                 linkedinRequestPasswordResetPage.findAccount(userEmailOrPhone);
 
-        sleep(180000);
+        sleep(18000);
         Assert.assertTrue(linkedinPasswordResetSubmitPage.isPageLoaded(),
                 "'Please check you email' page is not loaded.");
 

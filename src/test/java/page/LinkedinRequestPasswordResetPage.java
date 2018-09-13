@@ -55,18 +55,18 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
              // emailPhoneField.sendKeys(Keys.ENTER);
        findAccountButton.click();
 
-//        String messageSubject = "here's the link to reset your password";
-//        String messageTo = "qaeng2728@gmail.com";
-//        String messageFrom = "security-noreply@linkedin.com";
-//
-//        String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 400);
+        String messageSubject = "here's the link to reset your password";
+        String messageTo = "qaeng2728@gmail.com";
+        String messageFrom = "security-noreply@linkedin.com";
+
+        String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 400);
 //        String correctResetPasswordLink = exstractResetLink(message);
 //
 //        driver.get(correctResetPasswordLink);
 //
 //        System.out.println("Link for reset: " + correctResetPasswordLink);
 
-           return new LinkedinPasswordResetSubmitPage(driver);
+           return new LinkedinPasswordResetSubmitPage(driver, message);
     }
 
 //    private  String exstractResetLink(String message) {
@@ -85,7 +85,7 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
 //
 //        System.out.println(incorrectLink);
 //
-//        correctLink = incorrectLink.replaceAll("amp;", "");
+//        correctLink = incorrectLink.replaceAll("&amp;", "&");
 //        System.out.println("Go ahead: "+correctLink);
 //        return correctLink;
 //
