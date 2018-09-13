@@ -6,6 +6,7 @@ import util.GMailService;
 public class LinkedinBasePage {
     protected WebDriver driver;
     protected static GMailService gMailService= new GMailService();
+  //  protected static String message;
 
 
     public String getCurrentUrl(){

@@ -85,7 +85,7 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
 //
 //        System.out.println(incorrectLink);
 //
-//        correctLink = incorrectLink.replaceAll("amp;", "");
+//        correctLink = incorrectLink.replaceAll("&amp;", "&");
 //        System.out.println("Go ahead: "+correctLink);
 //        return correctLink;
 //

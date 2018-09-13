@@ -1,5 +1,6 @@
 package page;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -46,15 +47,22 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
 // проверить работу
     public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
 
+
         String messageSubject = "here's the link to reset your password";
         String messageTo = "qaeng2728@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
+        String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
 
-        String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 360);
-     //   System.out.println("HTML text:"+ message);
-        String correctResetPasswordLink = exstractResetLink(message);
-        System.out.println("LINK To change your LinkedIn password: " + correctResetPasswordLink);
-        driver.get(correctResetPasswordLink);
+        System.out.println("HTML text:"+ message);
+        String resetPasswordLink =
+                StringUtils.substringBetween(message,
+                        "To change your LinkedIn password, click <a href=\"",
+                        "\" style").replace("amp;","");
+
+        System.out.println(resetPasswordLink);
+        driver.get(resetPasswordLink);
+
+
         return new LinkedinSetNewPasswordPage(driver);
     }
 
@@ -74,7 +82,7 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
 
         System.out.println(incorrectLink);
 
-        correctLink = incorrectLink.replaceAll("amp;", "");
+        correctLink = incorrectLink.replaceAll("&amp;", "&");
         System.out.println(correctLink);
         return correctLink;
 
