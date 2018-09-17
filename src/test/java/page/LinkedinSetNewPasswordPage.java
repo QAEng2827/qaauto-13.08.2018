@@ -30,13 +30,21 @@ public class LinkedinSetNewPasswordPage extends LinkedinBasePage {
     private WebElement submitButton;
 
 
-    // конструктор
+    /*** Costructor of LinkedinSetNewPasswordPage.
+     *
+     * Initiate variables with Page Factory, when they are called.
+     * @param driver - driver instance from tests.
+     */
+
     public LinkedinSetNewPasswordPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
-
+        waitUntilElementVisible(submitButton, 10);
     }
 
+    /**  isPageLoaded method - checks URL, title,header,fields for new password and Submit button are found and as expected.
+     * @return true, when everything found.
+     */
     public boolean isPageLoaded() {
         return driver.getCurrentUrl().contains("/checkpoint/rp/")
                 //&& getCurrentTitle().contains("Please check your email for reset password link | LinkedIn");
@@ -49,22 +57,19 @@ public class LinkedinSetNewPasswordPage extends LinkedinBasePage {
 
     }
 
+    /**    submitNewPassword method fill in anew password.
+     *  @param userNewPassword -String with new password.
+     *  @param userNewPasswordRetype -String with new password.
+     * @return LinkedinSuccessfulPasswordResetPage.
+     */
+
     public LinkedinSuccessfulPasswordResetPage submitNewPassword(String userNewPassword, String userNewPasswordRetype) {
         newPasswordField.sendKeys(userNewPassword);
         retypeNewPasswordField.sendKeys(userNewPasswordRetype);
         submitButton.click();
-
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         return new LinkedinSuccessfulPasswordResetPage(driver);
 
     }
 
-    public String getHeaderMessageText(){
-        return headerPasswordResetPage.getText();
-    }
+
 }

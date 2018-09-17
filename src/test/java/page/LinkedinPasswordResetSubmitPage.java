@@ -9,6 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
+/**
+ *  PasswordResetSubmit Object Page
+ */
 public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
 
     @FindBy(xpath = "//div[@class='app__content']/header")
@@ -29,12 +32,23 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
     @FindBy(xpath = "//a[contains(@class, 'different__email--desktop')]")
     private WebElement tryDifferentEmailButton;
 
-    // конструктор
+    /**
+     * Costructor of PasswordResetSubmitPage.
+     *
+     * Initiate variables with Page Factory, when they are called.
+     * @param driver - driver instance from tests.
+     */
     public LinkedinPasswordResetSubmitPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        waitUntilElementVisible(tryDifferentEmailButton, 10);
 
     }
+
+    /**
+     * isPageLoaded method - checks URL, title, header and Try Different email button are found and as expected.
+     * @return true, when everything found.
+     */
 
     public boolean isPageLoaded() {
         return driver.getCurrentUrl().contains("/checkpoint/rp/request-password-reset-submit")
@@ -44,7 +58,18 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
                 && tryDifferentEmailButton.isDisplayed();
 
     }
-// проверить работу
+
+    /**
+     * navigateToLinkFromEmail method take link from email.
+     * Scenario:
+     * - Insert user email and click.
+     * - in email finds a link between 2 strings.
+     * - Print found link.
+     * - Get link to driver.
+     * @return LinkedinSetNewPasswordPage
+
+     */
+
     public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
 
 
@@ -53,11 +78,9 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
         String messageFrom = "security-noreply@linkedin.com";
         String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
 
-
-        System.out.println("HTML text:"+ message);
         String resetPasswordLink =
                 StringUtils.substringBetween(message,
-                        "To change your LinkedIn password, click <a href=\"",
+                        "To change your LinkedIn password, click <a href=\"", //escaping for " is \
                         "\" style").replace("amp;","");
 
         System.out.println(resetPasswordLink);
@@ -67,26 +90,26 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
         return new LinkedinSetNewPasswordPage(driver);
     }
 
-    private  String exstractResetLink(String message) {
-
-        String linkSearchStringBegin =  "https://www.linkedin.com/e/";
-        String incorrectLink;
-        String correctLink;
-
-        int beginResetLink = message.indexOf(linkSearchStringBegin);
-
-        String substringBegin = message.substring(beginResetLink);
-        System.out.println("LinkBegin: " + substringBegin);
-        int endResetLink = substringBegin.indexOf("\"");
-
-        incorrectLink = substringBegin.substring(0, endResetLink);
-
-        System.out.println(incorrectLink);
-
-        correctLink = incorrectLink.replaceAll("&amp;", "&");
-        System.out.println(correctLink);
-        return correctLink;
-
-    }
+//    private  String exstractResetLink(String message) {
+//
+//        String linkSearchStringBegin =  "https://www.linkedin.com/e/";
+//        String incorrectLink;
+//        String correctLink;
+//
+//        int beginResetLink = message.indexOf(linkSearchStringBegin);
+//
+//        String substringBegin = message.substring(beginResetLink);
+//        System.out.println("LinkBegin: " + substringBegin);
+//        int endResetLink = substringBegin.indexOf("\"");
+//
+//        incorrectLink = substringBegin.substring(0, endResetLink);
+//
+//        System.out.println(incorrectLink);
+//
+//        correctLink = incorrectLink.replaceAll("&amp;", "&");
+//        System.out.println(correctLink);
+//        return correctLink;
+//
+//    }
 
 }

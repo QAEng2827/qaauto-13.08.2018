@@ -20,16 +20,25 @@ public class LinkedInHomePage extends LinkedinBasePage {
     private WebElement searchField;
 
 
+    /**Costructor of Linkedin Home Page.
+     *
+     * Initiate variables with Page Factory, when they are called.
+     * @param driver - driver instance from tests.
 
+     */
 
-    // конструктор
     public LinkedInHomePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        waitUntilElementVisible(profileNavItem, 10);
     }
 
 
-
+    /**
+     * isPageLoaded method. Checks URL, title and Profile navigation menu are found as expected.
+     * @return true, when everything found.
+     *
+     */
     public boolean isPageLoaded(){
         return getCurrentUrl().equals("https://www.linkedin.com/feed/")
                 && getCurrentTitle().contains("LinkedIn")
@@ -37,6 +46,9 @@ public class LinkedInHomePage extends LinkedinBasePage {
 
     }
 
+    /** isLoadedSearchPage method. Input search word, wait, then follow to Search Page with results
+     * @return - true, if search field found and Search page is loaded
+     */
    public LinkedInSearchPage isLoadedSearchPage (){
 
       searchField.click();
@@ -44,18 +56,20 @@ public class LinkedInHomePage extends LinkedinBasePage {
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         searchField.sendKeys(Keys.ENTER);
         return new LinkedInSearchPage(driver);
-    //   searchField.sendKeys(Keys.ENTER);
+
 
     }
 
+    /*** search method - insert a search word with enter.
+     *
+     * @param searchTerm - word is searched.
+     * @return - LinkedinSearchPage with results
+     *
+     */
     public LinkedInSearchPage search(String searchTerm) {
         searchField.sendKeys(searchTerm);
         searchField.sendKeys(Keys.ENTER);
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         return new LinkedInSearchPage(driver);
     }
 }

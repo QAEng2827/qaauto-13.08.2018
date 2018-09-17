@@ -8,6 +8,9 @@ import page.LinkedinBasePage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * LinkedinSearch Object Page
+ */
 public class LinkedInSearchPage extends LinkedinBasePage {
 
     private WebElement searchField;
@@ -19,24 +22,38 @@ public class LinkedInSearchPage extends LinkedinBasePage {
     private List<WebElement> searchResults;
 
 
-    // конструктор
+    /** Costructor of LinkedinSearchPage.
+     *
+     * Initiate variables with Page Factory, when they are called.
+     * @param driver - driver instance from tests.
+     */
+
     public LinkedInSearchPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        waitUntilElementVisible(searchResultTotal, 10)
+        waitUntilElementVisible(searchResultTotal, 10);
     }
 
+    /**isPageLoaded method - checks URL, title and search results count are found as expected.
+     * @return true, when everything found.
+     */
     public boolean isPageLoaded(){
         return driver.getCurrentUrl().contains("search/results/")
                 && getCurrentTitle().contains("| Search | LinkedIn") &&
                 searchResultTotal.isDisplayed();
     }
 
+    /**  * getSearchResultsNumber method - calculates number of found results on page.
+     * @return integer size of link list
+     */
     public int getSearchResultsNumber() {
       return searchResults.size();
 
     }
 
+    /*** getSearchReasultList method - scroll to every found result and get it's text.
+     * @return String list of text results.
+     */
     public List<String> getSearchResultsList() {
         List<String> serchResultsList = new ArrayList<String>();
 

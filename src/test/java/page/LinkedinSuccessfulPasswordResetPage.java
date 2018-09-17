@@ -9,6 +9,9 @@ import page.LinkedinBasePage;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * LinkedinSuccessfulPasswordResetPage Page object.
+ */
 public class LinkedinSuccessfulPasswordResetPage extends LinkedinBasePage {
 
     @FindBy(xpath = "//a[@class='nav__base--logged-in nav__button--back-to-linkedin'")
@@ -24,13 +27,21 @@ public class LinkedinSuccessfulPasswordResetPage extends LinkedinBasePage {
     private WebElement goToHomepageButton;
 
 
-    // конструктор
+    /**
+     * Costructor of LinkedinSuccessfulPasswordResetPage.
+     *
+     * Initiate variables with Page Factory, when they are called.
+     * @param driver - driver instance from tests.
+     */
     public LinkedinSuccessfulPasswordResetPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
-
+        waitUntilElementVisible(goToHomepageButton, 10);
     }
 
+    /**  isPageLoaded method - checks URL, title and go home button are found and as expected.
+     * @return true, when everything found.
+     */
     public boolean isPageLoaded() {
         return driver.getCurrentUrl().contains("/checkpoint/rp/password-reset-submit")
                 //&& getCurrentTitle().contains("Please check your email for reset password link | LinkedIn");
@@ -41,18 +52,14 @@ public class LinkedinSuccessfulPasswordResetPage extends LinkedinBasePage {
 
     }
 
+    /**Following to the link on LinkedIn Home Page
+     * @return - new LinkedInHomePage
+     */
     public LinkedInHomePage clickOnGoToHomeButton(){
     goToHomepageButton.click();
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new LinkedInHomePage(driver);
+    return new LinkedInHomePage(driver);
 
     }
-    public String getHeaderMessageText(){
-        return headerPasswordResetSubmitPage.getText();
-    }
+
 
 }

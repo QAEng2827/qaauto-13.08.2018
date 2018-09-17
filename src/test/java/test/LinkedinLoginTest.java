@@ -9,8 +9,14 @@ import page.LinkedInLoginPage;
 import page.LinkedInSubmitPage;
 
 
+/**
+ * LinkedinLogin Test class.
+ */
 public class LinkedinLoginTest extends LinkedinBaseTest{
 
+    /** Set of correct cridentials
+     * @return - email/password
+     */
       @DataProvider
     public Object[][] validDataProvider() {
         return new Object[][]{
@@ -20,6 +26,23 @@ public class LinkedinLoginTest extends LinkedinBaseTest{
         };
     }
 
+    /**
+     * Verify successful user Login.
+     *
+     * Preconditions:
+     * - Open new browser.
+     * - Navigate to linkedin.com
+     *
+     * Scenario:
+     * - Verify that login page is loaded.
+     * - Enter userEmail.
+     * - Enter userPassword.
+     * - Click on 'Sign in' button.
+     * - Verify Home page is loaded.
+
+     * @param userEmail - email from DataProvider
+     * @param userPassword -password from DataProvider
+     */
     @Test(dataProvider = "validDataProvider")
     public void successfullLoginTest(String userEmail, String userPassword) {
 
@@ -29,6 +52,9 @@ public class LinkedinLoginTest extends LinkedinBaseTest{
 
     }
 
+    /** Set of cridentials with one field empty
+     * @return - email/password
+     */
     @DataProvider
     public Object[][] emptyFieldDataProvider() {
         return new Object[][]{
@@ -38,6 +64,20 @@ public class LinkedinLoginTest extends LinkedinBaseTest{
         };
     }
 
+    /**
+     * Verify user Login with empty email and/or password.
+     *
+     *  Preconditions:
+     *  Open new browser.
+     *  Navigate to linkedin.com
+     *
+     * Scenario:
+     * - Verify that login page is loaded.
+     * - Enter empty userEmail/userPassword.
+     * - Verify that signIn button disabled and logon impossible
+     * @param userEmail - email from DataProvider
+     * @param userPassword -password from DataProvider
+     */
     @Test(dataProvider = "emptyFieldDataProvider")
     public void emptyUserEmailandUserPassvordTest(String userEmail, String userPassword) {
 
@@ -50,6 +90,9 @@ public class LinkedinLoginTest extends LinkedinBaseTest{
 
     // negative tests
 
+    /** Set of incorrect cridentials
+     * @return - email/password
+     */
     @DataProvider
     public Object[][] invalidDataProvider() {
         return new Object[][]{
@@ -65,6 +108,22 @@ public class LinkedinLoginTest extends LinkedinBaseTest{
        };
     }
 
+    /**
+     * Verify user Login with wrong email and/or password.
+     *
+     *  Preconditions:
+     *  Open new browser.
+     *  Navigate to linkedin.com
+     *
+     *  Scenario:
+     *  - Verify that login page is loaded.
+     *  - Enter userEmail.
+     *  - Enter userPassword.
+     * @param userEmail - email from DataProvider
+     * @param userPassword -password from DataProvider
+     * @param messageLogin expected message for Login field
+     * @param messagePassword expected message for Password field
+     */
     @Test(dataProvider = "invalidDataProvider")
     public void negativeloginTest(String userEmail, String userPassword, String messageLogin, String messagePassword) {
 

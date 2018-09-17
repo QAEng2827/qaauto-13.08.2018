@@ -25,9 +25,6 @@ public class LinkedInLoginPage extends LinkedinBasePage {
     @FindBy(xpath = "//a[@class ='link-forgot-password']" )
     private WebElement forgotPasswordLink;
 
-// конструктор
-
-
     /**
      * Constructor for linkedInLoginPage;
      *
@@ -36,6 +33,7 @@ public class LinkedInLoginPage extends LinkedinBasePage {
     public LinkedInLoginPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this); //  просто считывает значения, но не ищет
+        waitUntilElementVisible(signInButton, 10);
 
     }
 
@@ -72,7 +70,9 @@ public class LinkedInLoginPage extends LinkedinBasePage {
     }
 
 
-
+    /** * isPageLoaded method. Checks URL, title and signIn Button are found as expected.
+     * @return true, when everything found.
+     */
     public boolean isPageLoaded(){
         return getCurrentUrl().equals("https://www.linkedin.com/")
                 && getCurrentTitle().equals("LinkedIn: Log In or Sign Up")
@@ -80,6 +80,9 @@ public class LinkedInLoginPage extends LinkedinBasePage {
 
     }
 
+    /** isButtonEnabled method. Checkup button "Sign in" is enabled
+     * @return true when signInButton is enable.
+     */
     public boolean isButtonEnabled(){
         return getCurrentUrl().equals("https://www.linkedin.com/")
                 && getCurrentTitle().equals("LinkedIn: Log In or Sign Up")
@@ -88,15 +91,15 @@ public class LinkedInLoginPage extends LinkedinBasePage {
     }
 
 
+    /**  * clickOnForgotPasswordLink method clicks on forgotPassword button.
+     *
+     * @return LinkedinRequestPasswordReset Page.
+
+     */
  public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink(){
     forgotPasswordLink.click();
-     try {
-         sleep(3000);
-     } catch (InterruptedException e) {
-         e.printStackTrace();
-     }
 
-     return new LinkedinRequestPasswordResetPage(driver);
+    return new LinkedinRequestPasswordResetPage(driver);
 
    }
 }

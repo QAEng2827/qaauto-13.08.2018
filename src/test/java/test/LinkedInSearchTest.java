@@ -11,6 +11,9 @@ import page.LinkedInSearchPage;
 
 import java.util.List;
 
+/**
+ * LinkedinSearch Test class
+ */
 public class LinkedInSearchTest extends  LinkedinBaseTest {
 
     @FindBy(xpath = ".//div[@class='blended-srp-results-js pt0 pb4 ph0 container-with-shadow']/ul/li" )
@@ -25,17 +28,19 @@ public class LinkedInSearchTest extends  LinkedinBaseTest {
         };
     }
 
-    /*- Open login page
-- Verify login page is loaded
-- Login with valid credentials
-- Verify home page is loaded
-- Search for 'hr' Searchterm
-- Verify Search page is loaded
-- Verify 10 results displayed on search page
-- Verify each result item contains searchTerm
-
-*/
-
+    /**
+     *  Scenario:
+     *  - Open login page
+     *  - Verify login page is loaded
+     *  - Login with valid credentials
+     *  - Verify home page is loaded
+     *  - Search for 'hr' Searchterm
+     *  - Verify Search page is loaded
+     *  - Verify 10 results displayed on search page
+     *  - Verify each result item contains searchTerm
+     * @param userEmail - email from dataDrovider
+     * @param userPassword -password from dataDrovider
+     */
     @Test(dataProvider = "validDataProvider")
     public void basicSearchTest(String userEmail, String userPassword) {
         String searchTerm = "HR";

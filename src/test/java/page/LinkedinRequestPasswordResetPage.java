@@ -7,6 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
+/**
+
+ * LinkedinRequestPasswordResetPage object Page.
+
+ */
 public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
    // private WebElement searchField;
 
@@ -31,13 +36,22 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
    // private List<WebElement> searchResults;
 
 
-    // конструктор
+    /** Costructor of LinkedinRequestPasswordReset Page
+     * Initiate variables with Page Factory, when they are called.
+     * @param driver - driver instance from tests.
+     */
+
     public LinkedinRequestPasswordResetPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        waitUntilElementVisible(findAccountButton, 10);
 
         }
 
+    /**
+     * isPageLoaded method - checks URL, title, email or phone field and Find Account button are found and as expected.
+     * @return true, when everything found.
+     */
     public boolean isPageLoaded() {
         return driver.getCurrentUrl().contains("/uas/request-password-reset")
                 && getCurrentTitle().contains("Reset Password | LinkedIn")
@@ -47,6 +61,14 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
 
     }
 
+    /** findAccount method input email addres and cliks to find Account button to reset password.
+     *
+     * - Connect to email service.
+     * - Wait for a new email with reset href.
+     * @param userEmailOrPhone - email for sending reset link
+     * @return Linkedin Password Reset Submit Page
+     */
+
     public LinkedinPasswordResetSubmitPage findAccount(String userEmailOrPhone) {
 
         gMailService.connect();
@@ -55,11 +77,11 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
              // emailPhoneField.sendKeys(Keys.ENTER);
        findAccountButton.click();
 
-        try {
-            sleep(18000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            sleep(18000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
 //        String messageSubject = "here's the link to reset your password";
 //        String messageTo = "qaeng2728@gmail.com";
