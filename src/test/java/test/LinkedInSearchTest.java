@@ -46,7 +46,8 @@ public class LinkedInSearchTest extends  LinkedinBaseTest {
         String searchTerm = "HR";
 
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
-        LinkedInHomePage linkedInHomePage = linkedInLoginPage.login(userEmail, userPassword);
+        //LinkedInHomePage linkedInHomePage = linkedInLoginPage.login(userEmail, userPassword);
+        LinkedInHomePage linkedInHomePage = linkedInLoginPage.login("qaeng2728@gmail.com", "chertopoloh2827");
         Assert.assertTrue(linkedInHomePage.isPageLoaded(), "Home page is not loaded.");
 
         LinkedInSearchPage linkedInSearchPage = linkedInHomePage.search(searchTerm);
