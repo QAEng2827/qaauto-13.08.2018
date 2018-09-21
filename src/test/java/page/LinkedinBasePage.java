@@ -14,7 +14,7 @@ import util.GMailService;
 public class LinkedinBasePage {
     protected WebDriver driver;
     protected static GMailService gMailService= new GMailService();
-  //  protected static String message;
+    //  protected static String message;
 
 
     /**getCurrent Url method.
@@ -44,6 +44,23 @@ public class LinkedinBasePage {
     protected WebElement waitUntilElementVisible (WebElement webElement, int timeOutInSec){
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSec);
         return wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+    protected boolean isUrlContains(String partialUrl, int timeOutInSec){
+        WebDriverWait wait = new WebDriverWait(driver, timeOutInSec);
+        try {
+            return wait.until(ExpectedConditions.urlContains(partialUrl));
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    protected void assertElementIsVisible(WebElement webElement, int timeOutInSec , String message) {
+        try {
+            waitUntilElementVisible(webElement, timeOutInSec);
+        } catch (TimeoutException e) {
+            throw new AssertionError(message);
+        }
     }
 
 

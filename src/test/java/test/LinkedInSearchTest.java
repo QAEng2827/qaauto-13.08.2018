@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.LinkedInHomePage;
 import page.LinkedInSearchPage;
@@ -41,6 +42,7 @@ public class LinkedInSearchTest extends  LinkedinBaseTest {
      * @param userEmail - email from dataDrovider
      * @param userPassword -password from dataDrovider
      */
+
     @Test(dataProvider = "validDataProvider")
     public void basicSearchTest(String userEmail, String userPassword) {
         String searchTerm = "HR";
