@@ -53,7 +53,7 @@ public class LinkedInHomePage extends LinkedinBasePage {
 
       searchField.click();
        searchField.sendKeys("HR");
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+      //  driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         searchField.sendKeys(Keys.ENTER);
         return new LinkedInSearchPage(driver);
 
