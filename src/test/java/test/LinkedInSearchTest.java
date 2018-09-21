@@ -23,7 +23,7 @@ public class LinkedInSearchTest extends  LinkedinBaseTest {
     public Object[][] validDataProvider() {
         return new Object[][]{
                 {"qaeng2728@gmail.com", "chertopoloh2827"},
-               // {"QAEng2728@gmail.com", "chertopoloh2827"},
+                // {"QAEng2728@gmail.com", "chertopoloh2827"},
 
         };
     }
@@ -46,8 +46,7 @@ public class LinkedInSearchTest extends  LinkedinBaseTest {
         String searchTerm = "HR";
 
         Assert.assertTrue(linkedInLoginPage.isPageLoaded(), "Login page is not loaded");
-        //LinkedInHomePage linkedInHomePage = linkedInLoginPage.login(userEmail, userPassword);
-        LinkedInHomePage linkedInHomePage = linkedInLoginPage.login("qaeng2728@gmail.com", "chertopoloh2827");
+        LinkedInHomePage linkedInHomePage = linkedInLoginPage.login(userEmail, userPassword);
         Assert.assertTrue(linkedInHomePage.isPageLoaded(), "Home page is not loaded.");
 
         LinkedInSearchPage linkedInSearchPage = linkedInHomePage.search(searchTerm);
@@ -55,10 +54,10 @@ public class LinkedInSearchTest extends  LinkedinBaseTest {
 
         Assert.assertEquals(linkedInSearchPage.getSearchResultsNumber(), 10, "Wrong number of searchResults on Search page.");
         List<String> searchResultsList = linkedInSearchPage.getSearchResultsList();
-         for (String searchResult : searchResultsList){
-             Assert.assertTrue(searchResult.toLowerCase().contains(searchTerm.toLowerCase()),
-                     "SearchTerm "+searchTerm+" not found in:\n"+searchResult );
-         }
+        for (String searchResult : searchResultsList){
+            Assert.assertTrue(searchResult.toLowerCase().contains(searchTerm.toLowerCase()),
+                    "SearchTerm "+searchTerm+" not found in:\n"+searchResult );
+        }
 
     }
 }

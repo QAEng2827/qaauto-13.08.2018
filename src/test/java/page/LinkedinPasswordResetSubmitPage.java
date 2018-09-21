@@ -54,7 +54,7 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
         return driver.getCurrentUrl().contains("/checkpoint/rp/request-password-reset-submit")
                 //&& getCurrentTitle().contains("Please check your email for reset password link | LinkedIn");
                 && resendLinkButton.isDisplayed()
-               && headerRequestPasswordResetSubmitPage.isDisplayed()
+                && headerRequestPasswordResetSubmitPage.isDisplayed()
                 && tryDifferentEmailButton.isDisplayed();
 
     }

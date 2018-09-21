@@ -15,8 +15,10 @@ import page.LinkedInLoginPage;
 public class LinkedinBaseTest {
     WebDriver driver;
     LinkedInLoginPage linkedInLoginPage;
-    int idBrowser = 3;
-    // 1-firefox; 2-chrome; 3-internetExplorer
+    int idBrowser = 3; // 1-firefox; 2-chrome; 3-internetExplorer
+
+
+
     /**
      * BeforeMethod - method executed before every Test.
      *
@@ -26,7 +28,7 @@ public class LinkedinBaseTest {
      * - Create LinkedinLoginPage.
      */
     @BeforeMethod
-public void beforeMethod() {
+    public void beforeMethod() {
 
         switch (idBrowser){
             case 1:
@@ -45,10 +47,10 @@ public void beforeMethod() {
                 System.out.println("browser : " + idBrowser + " is invalid, Launching Chrome as browser of choice..");
                 driver = new ChromeDriver();
         }
-   //     driver = new ChromeDriver();
-    driver.get("https://www.linkedin.com/");
-    linkedInLoginPage = new LinkedInLoginPage(driver);
-}
+        //     driver = new ChromeDriver();
+        driver.get("https://www.linkedin.com/");
+        linkedInLoginPage = new LinkedInLoginPage(driver);
+    }
 
     /**
      * AfterMethod - method executed after every Test.
@@ -63,5 +65,4 @@ public void beforeMethod() {
     }
 
 }
-
 

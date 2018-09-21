@@ -25,6 +25,7 @@ public class LinkedInLoginPage extends LinkedinBasePage {
     @FindBy(xpath = "//a[@class ='link-forgot-password']" )
     private WebElement forgotPasswordLink;
 
+
     /**
      * Constructor for linkedInLoginPage;
      *
@@ -33,7 +34,8 @@ public class LinkedInLoginPage extends LinkedinBasePage {
     public LinkedInLoginPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this); //  просто считывает значения, но не ищет
-        waitUntilElementVisible(signInButton, 10);
+        assertElementIsVisible(signInButton, 5, "Login page is not loaded.");
+       // waitUntilElementVisible(signInButton, 10);
 
     }
 
@@ -51,10 +53,10 @@ public class LinkedInLoginPage extends LinkedinBasePage {
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
 
-        try{ sleep(3000);}
-        catch (InterruptedException e){
-            e.printStackTrace();
-        }
+//       try{ sleep(3000);}
+//        catch (InterruptedException e){
+//            e.printStackTrace();
+//        }
 
         if (getCurrentUrl().contains("/feed")){
             return (T) new LinkedInHomePage(driver);
