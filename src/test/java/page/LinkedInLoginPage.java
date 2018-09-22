@@ -76,7 +76,7 @@ public class LinkedInLoginPage extends LinkedinBasePage {
      * @return true, when everything found.
      */
     public boolean isPageLoaded(){
-        return getCurrentUrl().equals("https://www.linkedin.com/")
+        return getCurrentUrl().contains(".linkedin.com/")
                 && getCurrentTitle().equals("LinkedIn: Log In or Sign Up")
                 && signInButton.isDisplayed();
 

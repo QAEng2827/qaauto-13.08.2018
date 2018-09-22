@@ -40,7 +40,7 @@ public class LinkedInHomePage extends LinkedinBasePage {
      *
      */
     public boolean isPageLoaded(){
-        return getCurrentUrl().equals("https://www.linkedin.com/feed/")
+        return getCurrentUrl().contains(".linkedin.com/")
                 && getCurrentTitle().contains("LinkedIn")
                 && profileNavItem.isDisplayed();
 

@@ -19,6 +19,7 @@ public class LinkedinBaseTest {
     LinkedInLoginPage linkedInLoginPage;
     //int idBrowser = 2; // 1-firefox; 2-chrome; 3-internetExplorer
     //String browserName = "chrome";
+    //String prefixCountry = "ua";
 
 
 
@@ -31,9 +32,10 @@ public class LinkedinBaseTest {
      * - Create LinkedinLoginPage.
      */
 
-    @Parameters("browserName")
+    @Parameters({"browserName","prefixCountry"})
+
     @BeforeMethod
-    public void beforeMethod(@Optional("Chrome") String browserName) throws Exception {
+    public void beforeMethod(@Optional("Chrome") String browserName, @Optional("https://ua.linkedin.com/") String prefixCountry) throws Exception {
 
         switch (browserName.toLowerCase()){
             case "chrome":
@@ -52,26 +54,10 @@ public class LinkedinBaseTest {
                 throw new Exception("Browser : " + browserName + " is not supported");
 
         }
-
-//        switch (idBrowser){
-//            case 1:
-//                WebDriverManager.firefoxdriver().setup();
-//                driver = new FirefoxDriver();
-//                break;
-//            case 2:
-//                WebDriverManager.chromedriver().setup();
-//                driver = new ChromeDriver();
-//                break;
-//            case 3:
-//                WebDriverManager.iedriver().setup();
-//                driver = new InternetExplorerDriver();
-//                break;
-//            default:
-//                System.out.println("browser : " + idBrowser + " is invalid, Launching Chrome as browser of choice..");
-//                driver = new ChromeDriver();
-//        }
-        //     driver = new ChromeDriver();
-        driver.get("https://www.linkedin.com/");
+      //  prefixCountry = "https://"+prefixCountry+"linkedin.com/";
+        driver.get(prefixCountry);
+        //driver.get("https://www.linkedin.com/");
+      //  System.out.println(prefixCountry);
         linkedInLoginPage = new LinkedInLoginPage(driver);
     }
 
