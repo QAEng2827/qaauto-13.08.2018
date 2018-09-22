@@ -136,8 +136,8 @@ public class LinkedinLoginTest extends LinkedinBaseTest{
 
         Assert.assertEquals(linkedInSubmitPage.getAlertMessageText(), "There were one or more errors in your submission. Please correct the marked fields below.",
                 "Alert message text is wrong.");
-        Assert.assertEquals(linkedInSubmitPage.getUserLoginAlertText(), messageLogin, "userEmail alert is wrong");
-        Assert.assertEquals(linkedInSubmitPage.getUserPasswordlAlertText(), messagePassword, "userPassword alert message is wrong");
+         Assert.assertEquals(linkedInSubmitPage.getUserLoginAlertText(), messageLogin, "userEmail alert is wrong");
+         Assert.assertEquals(linkedInSubmitPage.getUserPasswordlAlertText(), messagePassword, "userPassword alert message is wrong");
     }
 
 }
