@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Login Test Suite" parallel="tests" thread-count="2">
+
+    <test name="Chrome-Successfull">
+        <parameter name="browserName" value="Chrome"/>
+
+        <classes>
+            <class name="test.LinkedinLoginTest">
+                <methods>
+                    <include name="successfullLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <test name="Chrome-Empty values">
+        <parameter name="browserName" value="Chrome"/>
+        <classes>
+            <class name="test.LinkedinLoginTest">
+                <methods>
+                    <include name="emptyUserEmailandUserPassvordTest"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+
+
+</suite>

@@ -70,7 +70,7 @@ public class LinkedinBaseTest {
      * -Quit from browser.
      */
     @AfterMethod (alwaysRun = true)
-    public void afterMethod() {
+    public void afterMethod() throws Exception {
 
         driver.quit();
     }
