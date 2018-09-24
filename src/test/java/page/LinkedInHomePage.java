@@ -52,10 +52,9 @@ public class LinkedInHomePage extends LinkedinBasePage {
    public LinkedInSearchPage isLoadedSearchPage (){
 
       searchField.click();
-       searchField.sendKeys("HR");
-      //  driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-        searchField.sendKeys(Keys.ENTER);
-        return new LinkedInSearchPage(driver);
+      searchField.sendKeys("HR");
+      searchField.sendKeys(Keys.ENTER);
+      return new LinkedInSearchPage(driver);
 
 
     }
@@ -69,7 +68,6 @@ public class LinkedInHomePage extends LinkedinBasePage {
     public LinkedInSearchPage search(String searchTerm) {
         searchField.sendKeys(searchTerm);
         searchField.sendKeys(Keys.ENTER);
-
         return new LinkedInSearchPage(driver);
     }
 }

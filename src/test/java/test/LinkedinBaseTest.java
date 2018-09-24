@@ -17,11 +17,6 @@ import page.LinkedInLoginPage;
 public class LinkedinBaseTest {
     WebDriver driver;
     LinkedInLoginPage linkedInLoginPage;
-    //int idBrowser = 2; // 1-firefox; 2-chrome; 3-internetExplorer
-    //String browserName = "chrome";
-    //String prefixCountry = "ua";
-
-
 
     /**
      * BeforeMethod - method executed before every Test.
@@ -54,10 +49,8 @@ public class LinkedinBaseTest {
                 throw new Exception("Browser : " + browserName + " is not supported");
 
         }
-      //  prefixCountry = "https://"+prefixCountry+"linkedin.com/";
+
         driver.get(prefixCountry);
-        //driver.get("https://www.linkedin.com/");
-      //  System.out.println(prefixCountry);
         linkedInLoginPage = new LinkedInLoginPage(driver);
     }
 

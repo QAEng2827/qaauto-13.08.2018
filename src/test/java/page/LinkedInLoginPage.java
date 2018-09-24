@@ -35,8 +35,6 @@ public class LinkedInLoginPage extends LinkedinBasePage {
         this.driver = driver;
         PageFactory.initElements(driver, this); //  просто считывает значения, но не ищет
         assertElementIsVisible(signInButton, 5, "Login page is not loaded.");
-       // waitUntilElementVisible(signInButton, 10);
-
     }
 
 
@@ -52,11 +50,6 @@ public class LinkedInLoginPage extends LinkedinBasePage {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
-
-//       try{ sleep(3000);}
-//        catch (InterruptedException e){
-//            e.printStackTrace();
-//        }
 
         if (getCurrentUrl().contains("/feed")){
             return (T) new LinkedInHomePage(driver);
@@ -100,8 +93,6 @@ public class LinkedInLoginPage extends LinkedinBasePage {
      */
  public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink(){
     forgotPasswordLink.click();
-
     return new LinkedinRequestPasswordResetPage(driver);
-
    }
 }

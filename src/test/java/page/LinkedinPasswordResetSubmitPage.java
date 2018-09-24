@@ -49,9 +49,7 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
         String messageSubject = "here's the link to reset your password";
         String messageTo = "qaeng2728@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
-
         String message =  gMailService.waitMessage(messageSubject, messageTo, messageFrom, 360);
-     //   System.out.println("HTML text:"+ message);
         String correctResetPasswordLink = exstractResetLink(message);
         System.out.println("LINK To change your LinkedIn password: " + correctResetPasswordLink);
         driver.get(correctResetPasswordLink);
